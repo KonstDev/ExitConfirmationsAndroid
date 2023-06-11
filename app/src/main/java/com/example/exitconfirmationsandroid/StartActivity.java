@@ -8,6 +8,7 @@ public class StartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //piska
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
     }
