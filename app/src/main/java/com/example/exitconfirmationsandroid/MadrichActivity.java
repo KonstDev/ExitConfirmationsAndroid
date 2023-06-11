@@ -15,5 +15,6 @@ public class MadrichActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMadrichBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
     }
 }
