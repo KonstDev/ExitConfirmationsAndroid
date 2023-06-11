@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.exitconfirmationsandroid.databinding.ActivityMadrichBinding;
+
 public class MadrichActivity extends AppCompatActivity {
+
+    private ActivityMadrichBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_madrich);
+        binding = ActivityMadrichBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
 }
