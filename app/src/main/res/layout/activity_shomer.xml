@@ -60,7 +60,6 @@
         android:layout_height="81dp"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.961"
         app:layout_constraintStart_toEndOf="@id/line"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line">
