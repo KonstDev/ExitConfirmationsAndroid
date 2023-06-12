@@ -21,12 +21,13 @@
         style="@style/bhText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="21dp"
         android:layout_weight="1"
         android:text="@string/bhUserName"
         app:layout_constraintStart_toStartOf="@+id/header_title"
-        app:layout_constraintTop_toTopOf="@+id/header_title" />
+        app:layout_constraintTop_toTopOf="@+id/header_title"
+        tools:ignore="TextSizeCheck" />
 
     <TextView
         android:id="@+id/tvStatus"
@@ -34,11 +35,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
-        android:layout_marginRight="42dp"
+        android:layout_marginEnd="42dp"
         android:fontFamily="@font/inter"
-        android:text="@string/accoutType"
+        android:text="@string/accountType"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/header_title" />
+        app:layout_constraintTop_toTopOf="@+id/header_title"
+        tools:ignore="TextSizeCheck,TextSizeCheck" />
     >
 
     <View
@@ -72,7 +74,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/petek"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"></View>
+            app:layout_constraintVertical_bias="1.0" />
         />
 
         <TextView
@@ -84,7 +86,8 @@
             android:layout_marginBottom="29dp"
             android:text="@string/timeConf"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="TextSizeCheck" />
 
         <TextView
             android:id="@+id/StudentConfName"
@@ -96,7 +99,8 @@
             android:text="@string/alexey_ivanov"
             android:textSize="9pt"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextSizeCheck" />
 
         <ImageView
             android:id="@+id/confirm_button"
@@ -106,18 +110,21 @@
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/vector" />
+            app:srcCompat="@drawable/vector"
+            tools:ignore="ImageContrastCheck"
+            android:importantForAccessibility="no" />
 
         <TextView
             android:id="@+id/classConf"
             style="@style/bhText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="@string/_4"
             android:textSize="7pt"
             app:layout_constraintStart_toStartOf="@+id/StudentConfName"
             app:layout_constraintTop_toBottomOf="@+id/StudentConfName"
-            android:layout_marginTop="5dp"/>
+            tools:ignore="TextSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

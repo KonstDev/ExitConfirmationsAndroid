@@ -13,4 +13,7 @@
     <string name="group">Group: Yud Alef Naale</string>
     <string name="Madrich">Madrich: Alexa</string>
     <string name="accept">Accept</string>
+    <string name="accountTypeMadrich">madrich</string>
+    <string name="delete">Delete</string>
+    <string name="accountType">shomer</string>
 </resources>
