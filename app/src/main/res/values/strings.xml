@@ -1,8 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ExitConfirmationsAndroid</string>
-    <string name="login">להתחבר</string>
-    <string name="login_to_acc">להתחבר לחשבון</string>
-    <string name="email">א-מייל</string>
-    <string name="password">סיסמה</string>
 </resources>
