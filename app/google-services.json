@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "940168195435",
+    "firebase_url": "https://exitconfirmation-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "exitconfirmation",
+    "storage_bucket": "exitconfirmation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940168195435:android:44dec09da4bdddfc48f02e",
+        "android_client_info": {
+          "package_name": "com.example.exitconfirmationsandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940168195435-ehafcvgk93b6hgtkrje69lb075s0mk9c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV5HloWBBw2MKCFAg_3zdT8CNs3sdnlf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940168195435-ehafcvgk93b6hgtkrje69lb075s0mk9c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "940168195435-po3olutp2fmeoou67nki2hr32fr1l6p2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dem.ExitConfirmations"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940168195435:android:861eea095ed1858448f02e",
+        "android_client_info": {
+          "package_name": "com.konstdev.petekschecker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940168195435-ehafcvgk93b6hgtkrje69lb075s0mk9c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV5HloWBBw2MKCFAg_3zdT8CNs3sdnlf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940168195435-ehafcvgk93b6hgtkrje69lb075s0mk9c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "940168195435-po3olutp2fmeoou67nki2hr32fr1l6p2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dem.ExitConfirmations"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
