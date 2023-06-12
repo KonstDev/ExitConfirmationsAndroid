@@ -81,20 +81,33 @@
         app:layout_constraintTop_toBottomOf="@id/GoingTo"
         tools:ignore="TextSizeCheck" />
 
+    <TextView
+        android:id="@+id/Madrich"
+        style="@style/bhText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/Madrich"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Group"
+        tools:ignore="TextSizeCheck" />
 
     <Button
-        android:id="@+id/btnDelete"
+        android:id="@+id/btnAccept"
         style="@style/bhText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:backgroundTint="@color/pastel_red"
-        android:text="@string/delete"
+        android:backgroundTint="@color/additional_color"
+        android:text="@string/show"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Group"
+        app:layout_constraintTop_toBottomOf="@+id/Madrich"
         tools:ignore="TextSizeCheck,TextContrastCheck" />
+
     <ImageView
         android:id="@+id/ivClose"
         android:layout_width="24dp"

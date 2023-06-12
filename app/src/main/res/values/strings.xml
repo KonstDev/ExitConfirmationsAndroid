@@ -16,4 +16,6 @@
     <string name="accountTypeMadrich">madrich</string>
     <string name="delete">Delete</string>
     <string name="accountType">shomer</string>
+    <string name="accountTypeStudent">student</string>
+    <string name="show">Show</string>
 </resources>
