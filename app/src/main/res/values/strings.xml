@@ -5,4 +5,12 @@
     <string name="timeConf">20:40</string>
     <string name="accoutType">shomer</string>
     <string name="bhUserName">Ivan Ivanov</string>
+    <string name="ConfName">Ivan Ivanov</string>
+    <string name="StudentConfClass">י4</string>
+    <string name="exitTime">Exit time: 12:00</string>
+    <string name="returnTime">Return Time: 22:00</string>
+    <string name="goingTo">Going to: Binyamina</string>
+    <string name="group">Group: Yud Alef Naale</string>
+    <string name="Madrich">Madrich: Alexa</string>
+    <string name="accept">Accept</string>
 </resources>
