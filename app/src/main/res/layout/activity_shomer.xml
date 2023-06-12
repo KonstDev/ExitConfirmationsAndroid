@@ -24,7 +24,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="21dp"
         android:layout_weight="1"
-        android:text="Ivan Ivanov"
+        android:text="@string/bhUserName"
         app:layout_constraintStart_toStartOf="@+id/header_title"
         app:layout_constraintTop_toTopOf="@+id/header_title" />
 
@@ -36,7 +36,7 @@
         android:layout_marginTop="21dp"
         android:layout_marginRight="42dp"
         android:fontFamily="@font/inter"
-        android:text="shomer"
+        android:text="@string/accoutType"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/header_title" />
     >
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="37dp"
             android:layout_marginBottom="29dp"
-            android:text="20:40"
+            android:text="@string/timeConf"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="78dp"
             android:layout_marginTop="15dp"
-            android:text="Alexey Ivanov"
+            android:text="@string/alexey_ivanov"
             android:textSize="9pt"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -114,7 +114,7 @@
             style="@style/bhText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="י4"
+            android:text="@string/_4"
             android:textSize="7pt"
             app:layout_constraintStart_toStartOf="@+id/StudentConfName"
             app:layout_constraintTop_toBottomOf="@+id/StudentConfName"

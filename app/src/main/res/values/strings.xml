@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ExitConfirmationsAndroid</string>
+    <string name="_4">י4</string>
+    <string name="alexey_ivanov">Alexey Ivanov</string>
+    <string name="timeConf">20:40</string>
+    <string name="accoutType">shomer</string>
+    <string name="bhUserName">Ivan Ivanov</string>
 </resources>
