@@ -42,7 +42,7 @@
         tools:text="exit time, exit date" />
     <TextView
         style="@style/bhText"
-        android:id="@+id/ReturnTime"
+        android:id="@+id/returnTime"
         android:textStyle="normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         tools:text="Going to"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ReturnTime"
+        app:layout_constraintTop_toBottomOf="@id/returnTime"
         android:layout_marginTop="15dp"
         android:layout_marginStart="32dp"/>
     <TextView
