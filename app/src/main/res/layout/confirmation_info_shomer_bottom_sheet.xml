@@ -3,49 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
 
     <TextView
-        android:id="@+id/StudentConfName"
+        android:id="@+id/students_names"
         style="@style/bhText"
         android:textSize="9pt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/ConfName"
+        tools:text="Student name"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         />
 
     <TextView
         style="@style/bhText"
-        android:id="@+id/StudentConfClass"
+        android:id="@+id/madrich_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="@+id/StudentConfName"
-        app:layout_constraintTop_toBottomOf="@+id/StudentConfName"
-        android:text="@string/StudentConfClass"/>
+        app:layout_constraintStart_toStartOf="@+id/students_names"
+        app:layout_constraintTop_toBottomOf="@+id/students_names"
+        tools:text="Madrich"/>
 
     <TextView
-        style="@style/bhText"
         android:id="@+id/exitTime"
-        android:textStyle="normal"
+        style="@style/bhText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/exitTime"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="15dp"
+        android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="111dp"
-        android:layout_marginStart="32dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/madrich_tv"
+        tools:text="exit time, exit date" />
     <TextView
         style="@style/bhText"
         android:id="@+id/ReturnTime"
         android:textStyle="normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/returnTime"
+        tools:text="return time, return date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/exitTime"
         android:layout_marginTop="15dp"
@@ -56,31 +57,20 @@
         android:textStyle="normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/goingTo"
+        tools:text="Going to"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ReturnTime"
         android:layout_marginTop="15dp"
         android:layout_marginStart="32dp"/>
     <TextView
         style="@style/bhText"
-        android:id="@+id/Group"
+        android:id="@+id/group_tv"
         android:textStyle="normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/group"
+        tools:text="Group"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/GoingTo"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="32dp"/>
-    <TextView
-        style="@style/bhText"
-        android:id="@+id/Madrich"
-        android:textStyle="normal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Madrich"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Group"
         android:layout_marginTop="15dp"
         android:layout_marginStart="32dp"/>
 
@@ -95,16 +85,17 @@
         android:text="@string/accept"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Madrich"
+        app:layout_constraintTop_toBottomOf="@+id/group_tv"
         />
 
     <ImageView
         android:id="@+id/ivClose"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_close_24"
-        android:layout_marginTop="35dp"
+        android:padding="5dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="23dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
