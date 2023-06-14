@@ -2,7 +2,7 @@ package com.example.exitconfirmationsandroid.exit_permissions;
 
 public class ExitPermission {
     public boolean confirmed;
-    public String exitDate, exitTime, goingTo, group, madrich_name, returnDate, returnTime,
+    public String id,exitDate, exitTime, goingTo, group, madrich_name, returnDate, returnTime,
             students_ids, students_names;
 
     public ExitPermission(boolean confirmed, String exitDate, String exitTime, String goingTo,

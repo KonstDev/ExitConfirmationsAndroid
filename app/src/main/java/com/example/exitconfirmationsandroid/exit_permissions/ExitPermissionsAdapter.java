@@ -5,9 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.exitconfirmationsandroid.R;
+import com.example.exitconfirmationsandroid.bottomsheet.ShomerPermissionInfoBottomSheet;
 
 import java.util.ArrayList;
 
@@ -16,9 +18,12 @@ public class ExitPermissionsAdapter extends RecyclerView.Adapter<ExitPermissionV
     private ArrayList<ExitPermission> exitPermissions;
     private int account_type;
 
-    public ExitPermissionsAdapter(ArrayList<ExitPermission> exitPermissions, int account_type) {
+    private FragmentManager supportFragmentManager;
+
+    public ExitPermissionsAdapter(ArrayList<ExitPermission> exitPermissions, int account_type, FragmentManager supportFragmentManager) {
         this.exitPermissions = exitPermissions;
         this.account_type = account_type;
+        this.supportFragmentManager = supportFragmentManager;
     }
 
     @NonNull
@@ -41,6 +46,17 @@ public class ExitPermissionsAdapter extends RecyclerView.Adapter<ExitPermissionV
         holder.going_to_tv.setText(exitPermissions.get(position).goingTo);
         holder.groups_tv.setText(exitPermissions.get(position).group);
         holder.exit_date_and_time_tv.setText(exitPermissions.get(position).exitDate + " " + exitPermissions.get(position).exitTime);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //if the user is a shomer we open the bottom sheet
+                if (account_type == 1){
+                    ShomerPermissionInfoBottomSheet bottomSheet = new ShomerPermissionInfoBottomSheet(exitPermissions.get(position));
+                    bottomSheet.show(supportFragmentManager, "bottomSheet");
+                }
+            }
+        });
     }
 
     @Override

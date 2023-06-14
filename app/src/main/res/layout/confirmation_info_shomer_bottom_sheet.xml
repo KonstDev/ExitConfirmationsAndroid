@@ -53,7 +53,7 @@
         android:layout_marginStart="32dp"/>
     <TextView
         style="@style/bhText"
-        android:id="@+id/GoingTo"
+        android:id="@+id/going_to"
         android:textStyle="normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         tools:text="Group"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/GoingTo"
+        app:layout_constraintTop_toBottomOf="@id/going_to"
         android:layout_marginTop="15dp"
         android:layout_marginStart="32dp"/>
 
@@ -88,10 +88,11 @@
         app:layout_constraintTop_toBottomOf="@+id/group_tv"
         />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/ivClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_close_24"
