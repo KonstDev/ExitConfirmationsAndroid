@@ -5,6 +5,11 @@
     <string name="email">א-מייל</string>
     <string name="password">סיסמה</string>
     <string name="username">שם</string>
-    <string name="madrich">מדריך</string>
+    <string name="madrich">מדריך/ה</string>
+    <string name="guard">שומר</string>
     <string name="accept">לאשר</string>
+    <string name="going_to">יציאה ל</string>
+    <string name="exit_time">זמן יציאה</string>
+    <string name="return_time">זמן חזרה</string>
+    <string name="group">קבוצה</string>
 </resources>

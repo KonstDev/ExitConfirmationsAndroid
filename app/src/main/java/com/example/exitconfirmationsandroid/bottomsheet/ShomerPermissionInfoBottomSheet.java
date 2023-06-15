@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.exitconfirmationsandroid.R;
 import com.example.exitconfirmationsandroid.databinding.ConfirmationInfoShomerBottomSheetBinding;
 import com.example.exitconfirmationsandroid.exit_permissions.ExitPermission;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -29,11 +30,11 @@ public class ShomerPermissionInfoBottomSheet extends BottomSheetDialogFragment {
         binding = ConfirmationInfoShomerBottomSheetBinding.inflate(inflater, container, false);
 
         binding.studentsNames.setText(exitPermission.students_names);
-        binding.madrichTv.setText(exitPermission.madrich_name);
-        binding.exitTime.setText(exitPermission.exitTime + " " + exitPermission.exitDate);
-        binding.returnTime.setText(exitPermission.returnTime + " " + exitPermission.returnDate);
-        binding.goingTo.setText(exitPermission.goingTo);
-        binding.groupTv.setText(exitPermission.group);
+        binding.madrichTv.setText(getString(R.string.madrich) + ": "+ exitPermission.madrich_name);
+        binding.exitTime.setText(getString(R.string.exit_time) + ": " + exitPermission.exitTime + " " + exitPermission.exitDate);
+        binding.returnTime.setText(getString(R.string.return_time) + ": " + exitPermission.returnTime + " " + exitPermission.returnDate);
+        binding.goingTo.setText(getString(R.string.going_to) + ": " + exitPermission.goingTo);
+        binding.groupTv.setText(getString(R.string.group) + ": " + exitPermission.group);
 
         //if the permission is already confirmed we hide the confirm button
         if (exitPermission.confirmed){

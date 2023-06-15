@@ -51,7 +51,7 @@ public class ExitPermissionsAdapter extends RecyclerView.Adapter<ExitPermissionV
             @Override
             public void onClick(View v) {
                 //if the user is a shomer we open the bottom sheet
-                if (account_type == 1){
+                if (account_type == 3){
                     ShomerPermissionInfoBottomSheet bottomSheet = new ShomerPermissionInfoBottomSheet(exitPermissions.get(position));
                     bottomSheet.show(supportFragmentManager, "bottomSheet");
                 }

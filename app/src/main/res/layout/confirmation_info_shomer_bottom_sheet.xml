@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="10dp">
+    android:paddingBottom="15dp">
 
     <TextView
         android:id="@+id/students_names"
@@ -81,7 +81,9 @@
         android:backgroundTint="@color/additional_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
+        android:paddingStart="60dp"
+        android:paddingEnd="60dp"
         android:text="@string/accept"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

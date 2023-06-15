@@ -5,9 +5,10 @@ public class ExitPermission {
     public String id,exitDate, exitTime, goingTo, group, madrich_name, returnDate, returnTime,
             students_ids, students_names;
 
-    public ExitPermission(boolean confirmed, String exitDate, String exitTime, String goingTo,
+    public ExitPermission(String id,boolean confirmed, String exitDate, String exitTime, String goingTo,
                           String group, String madrich_name, String returnDate,
                           String returnTime, String students_ids, String students_names) {
+        this.id = id;
         this.confirmed = confirmed;
         this.exitDate = exitDate;
         this.exitTime = exitTime;
