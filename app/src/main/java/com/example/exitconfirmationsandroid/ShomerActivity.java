@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.exitconfirmationsandroid.databinding.ActivityShomerBinding;
 import com.example.exitconfirmationsandroid.exit_permissions.ExitPermission;
@@ -22,7 +23,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ShomerActivity extends AppCompatActivity {
 
@@ -51,6 +56,7 @@ public class ShomerActivity extends AppCompatActivity {
     }
 
     public void loadGuardInfo(){
+        binding.progressBar.setVisibility(View.VISIBLE);
         FirebaseDatabase.getInstance().getReference("Guards").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name")
                 .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
@@ -71,6 +77,17 @@ public class ShomerActivity extends AppCompatActivity {
                         ArrayList<ExitPermission> exitPermissions1 = new ArrayList<>();
                         String[] exit_permissions = task.getResult().getValue().toString().split(",");
                         for (int i = 0; i < exit_permissions.length; i++) {
+                            Calendar calendar = Calendar.getInstance();
+                            Date currentDate = calendar.getTime();
+
+                            // Calculate a week earlier date
+                            calendar.add(Calendar.WEEK_OF_YEAR, -1);
+                            Date weekEarlierDate = calendar.getTime();
+
+                            // Format date to match Firebase database format (yyyy-MM-dd)
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            String weekEarlierDateString = dateFormat.format(weekEarlierDate);
+
                             boolean confirmed = Boolean.parseBoolean(snapshot.child(exit_permissions[i]).child("confirmed").getValue().toString());
                             String exitDate = snapshot.child(exit_permissions[i]).child("exitDate").getValue().toString();
                             String exitTime = snapshot.child(exit_permissions[i]).child("exitTime").getValue().toString();
@@ -83,14 +100,35 @@ public class ShomerActivity extends AppCompatActivity {
                             String students_ids = snapshot.child(exit_permissions[i]).child("students_ids").getValue().toString();
                             String students_names = snapshot.child(exit_permissions[i]).child("students_names").getValue().toString();
 
+                            // Combine exitDate and exitTime into a single DateTime string
+                            String exitDateTimeString = exitDate + " " + exitTime;
 
+                            // Parse exitDateTime string to Date object
+                            SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                            try {
+                                Date exitDateTime = dateTimeFormat.parse(exitDateTimeString);
+
+                                // Check if exitDateTime is later than a week from the current date
+                                if (weekEarlierDate.after(exitDateTime)) {
+                                    // Delete the exit permission
+//                                    FirebaseDatabase.getInstance().getReference("ExitPermissions")
+//                                            .child(exit_permissions[i]).removeValue();
+                                    Log.d("TAG", "YEESSSSS");
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
 
                             exitPermissions1.add(new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, returnDate, returnTime, students_ids, students_names));
                         }
 
+                        //setting up recycler view
                         binding.allPermissions.setLayoutManager(new LinearLayoutManager(ShomerActivity.this));
                         binding.allPermissions.addItemDecoration(new DividerItemDecoration(ShomerActivity.this, DividerItemDecoration.VERTICAL));
                         binding.allPermissions.setAdapter(new ExitPermissionsAdapter(exitPermissions1, 3, getSupportFragmentManager()));
+
+                        //disabling progress bar
+                        binding.progressBar.setVisibility(View.GONE);
                     }
 
                     @Override
