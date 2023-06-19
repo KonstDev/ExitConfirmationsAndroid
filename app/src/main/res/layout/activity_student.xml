@@ -7,133 +7,67 @@
     tools:context=".StartActivity"
     tools:ignore="ExtraText">
 
-    <TextView
+    <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="student"
+        android:id="@+id/progressBar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/header_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/user_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:text="@string/username"
+            app:layout_constraintStart_toStartOf="@+id/header_title"
+            app:layout_constraintTop_toTopOf="@+id/header_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="TextSizeCheck" />
+
+        <TextView
+            android:id="@+id/user_status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/inter"
+            android:text="תלמיד"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/header_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="TextSizeCheck,TextSizeCheck" />
+        >
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/user_name_tv"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/all_permissions"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/header_title" />
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/header_title"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="63dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/tvName"-->
-<!--        style="@style/bhText"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginTop="21dp"-->
-<!--        android:layout_weight="1"-->
-<!--        android:text="@string/bhUserName"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/header_title"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/header_title"-->
-<!--        tools:ignore="TextSizeCheck" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/tvStatus"-->
-<!--        style="@style/bhText"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="21dp"-->
-<!--        android:layout_marginEnd="42dp"-->
-<!--        android:fontFamily="@font/inter"-->
-<!--        android:text="@string/accountTypeStudent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/header_title"-->
-<!--        tools:ignore="TextSizeCheck" />-->
-<!--    >-->
-
-<!--    <View-->
-<!--        android:id="@+id/line"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="2dp"-->
-<!--        android:background="@color/black"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/header_title"-->
-<!--        app:layout_constraintEnd_toStartOf="@id/header_title"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="1.0">-->
-
-
-<!--    </View>-->
-
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/petek"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="81dp"-->
-
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@id/line"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/line">-->
-
-<!--        <View-->
-<!--            android:id="@+id/line2"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="1dp"-->
-<!--            android:background="@color/black"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/petek"-->
-<!--            app:layout_constraintEnd_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="1.0" />-->
-<!--        />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/timeConf"-->
-<!--            style="@style/bhText"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginEnd="37dp"-->
-<!--            android:layout_marginBottom="29dp"-->
-<!--            android:text="@string/timeConf"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            tools:ignore="TextSizeCheck" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/StudentConfName"-->
-<!--            style="@style/bhText"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="78dp"-->
-<!--            android:layout_marginTop="15dp"-->
-<!--            android:text="@string/alexey_ivanov"-->
-<!--            android:textSize="9pt"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            tools:ignore="TextSizeCheck" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/confirm_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="15dp"-->
-<!--            android:layout_marginBottom="30dp"-->
-<!--            android:importantForAccessibility="no"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:srcCompat="@drawable/vector"-->
-<!--            tools:ignore="ImageContrastCheck" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/classConf"-->
-<!--            style="@style/bhText"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:text="@string/_4"-->
-<!--            android:textSize="7pt"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/StudentConfName"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/StudentConfName"-->
-<!--            tools:ignore="TextSizeCheck" />-->
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
