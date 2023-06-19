@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.exitconfirmationsandroid.R;
-import com.example.exitconfirmationsandroid.bottomsheet.ShomerPermissionInfoBottomSheet;
+import com.example.exitconfirmationsandroid.bottomsheets.ShomerPermissionInfoBottomSheet;
 
 import java.util.ArrayList;
 

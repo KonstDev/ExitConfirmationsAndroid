@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/students_names"
-        style="@style/bhText"
-        android:textSize="9pt"
+        style="@style/h1"
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +20,7 @@
         />
 
     <TextView
-        style="@style/bhText"
+        style="@style/h2"
         android:id="@+id/madrich_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
 
     <TextView
         android:id="@+id/exitTime"
-        style="@style/bhText"
+        style="@style/base_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/madrich_tv"
         tools:text="exit time, exit date" />
     <TextView
-        style="@style/bhText"
+        style="@style/base_text"
         android:id="@+id/returnTime"
         android:textStyle="normal"
         android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="32dp"/>
     <TextView
-        style="@style/bhText"
+        style="@style/base_text"
         android:id="@+id/going_to"
         android:textStyle="normal"
         android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="32dp"/>
     <TextView
-        style="@style/bhText"
+        style="@style/base_text"
         android:id="@+id/group_tv"
         android:textStyle="normal"
         android:layout_width="wrap_content"
@@ -75,7 +75,6 @@
         android:layout_marginStart="32dp"/>
 
     <Button
-        style="@style/bhText"
         android:textColor="@color/white"
         android:id="@+id/btnAccept"
         android:backgroundTint="@color/additional_color"

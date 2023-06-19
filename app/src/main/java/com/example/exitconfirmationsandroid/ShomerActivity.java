@@ -39,19 +39,8 @@ public class ShomerActivity extends AppCompatActivity {
         binding = ActivityShomerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                loadExitPermissions();
-            }
-        }).start();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                loadGuardInfo();
-            }
-        }).start();
+        loadGuardInfo();
+        loadExitPermissions();
 
     }
 
@@ -104,16 +93,15 @@ public class ShomerActivity extends AppCompatActivity {
                             String exitDateTimeString = exitDate + " " + exitTime;
 
                             // Parse exitDateTime string to Date object
-                            SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                            SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
                             try {
                                 Date exitDateTime = dateTimeFormat.parse(exitDateTimeString);
 
                                 // Check if exitDateTime is later than a week from the current date
                                 if (weekEarlierDate.after(exitDateTime)) {
                                     // Delete the exit permission
-//                                    FirebaseDatabase.getInstance().getReference("ExitPermissions")
-//                                            .child(exit_permissions[i]).removeValue();
-                                    Log.d("TAG", "YEESSSSS");
+                                    FirebaseDatabase.getInstance().getReference("ExitPermissions")
+                                            .child(exit_permissions[i]).removeValue();
                                 }
                             } catch (ParseException e) {
                                 e.printStackTrace();

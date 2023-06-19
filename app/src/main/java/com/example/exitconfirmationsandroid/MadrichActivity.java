@@ -71,8 +71,6 @@ public class MadrichActivity extends AppCompatActivity {
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         String weekEarlierDateString = dateFormat.format(weekEarlierDate);
 
-
-                        Log.d("TAG", "onDataChange: " + task.getResult().getValue().toString());
                         ArrayList<ExitPermission> exitPermissions1 = new ArrayList<>();
                         String[] exit_permissions = task.getResult().getValue().toString().split(",");
                         for (int i = 0; i < exit_permissions.length; i++) {
@@ -92,16 +90,15 @@ public class MadrichActivity extends AppCompatActivity {
                             String exitDateTimeString = exitDate + " " + exitTime;
 
                             // Parse exitDateTime string to Date object
-                            SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                            SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
                             try {
                                 Date exitDateTime = dateTimeFormat.parse(exitDateTimeString);
 
                                 // Check if exitDateTime is later than a week from the current date
                                 if (weekEarlierDate.after(exitDateTime)) {
                                     // Delete the exit permission
-//                                    FirebaseDatabase.getInstance().getReference("ExitPermissions")
-//                                            .child(exit_permissions[i]).removeValue();
-                                    Log.d("TAG", "YEESSSSS");
+                                    FirebaseDatabase.getInstance().getReference("ExitPermissions")
+                                            .child(exit_permissions[i]).removeValue();
                                 }
                             } catch (ParseException e) {
                                 e.printStackTrace();

@@ -1,4 +1,4 @@
-package com.example.exitconfirmationsandroid.bottomsheet;
+package com.example.exitconfirmationsandroid.bottomsheets;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
