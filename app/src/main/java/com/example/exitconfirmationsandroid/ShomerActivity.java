@@ -77,7 +77,7 @@ public class ShomerActivity extends AppCompatActivity {
                             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                             String weekEarlierDateString = dateFormat.format(weekEarlierDate);
 
-                            boolean confirmed = Boolean.parseBoolean(snapshot.child(exit_permissions[i]).child("confirmed").getValue().toString());
+                            boolean confirmed = Boolean.parseBoolean((String) snapshot.child(exit_permissions[i]).child("confirmed").getValue());
                             String exitDate = snapshot.child(exit_permissions[i]).child("exitDate").getValue().toString();
                             String exitTime = snapshot.child(exit_permissions[i]).child("exitTime").getValue().toString();
                             String goingTo = snapshot.child(exit_permissions[i]).child("goingTo").getValue().toString();

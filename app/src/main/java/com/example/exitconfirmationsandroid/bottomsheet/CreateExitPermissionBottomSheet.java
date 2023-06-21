@@ -14,7 +14,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 public class CreateExitPermissionBottomSheet extends BottomSheetDialogFragment {
 
     private CreateExitPermissionBottomSheetBinding binding;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
