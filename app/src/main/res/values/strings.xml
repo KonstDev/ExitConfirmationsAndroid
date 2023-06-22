@@ -16,4 +16,6 @@
     <string name="students_choosing">בחירת החניכים</string>
     <string name="continue_t">להמשיך</string>
     <string name="for_whom_permission">למי הפתק? </string>
+    <string name="for_this_group">לתלמיד מכיתה הזאת</string>
+    <string name="for_other_group">לכל תלמיד</string>
 </resources>

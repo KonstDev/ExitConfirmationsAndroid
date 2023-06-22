@@ -2,9 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="15dp">
 
     <TextView
+        android:id="@+id/for_whom_permission_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/for_whom_permission"
@@ -13,5 +15,28 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="5dp"
         android:layout_marginStart="5dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/create_permission_for_everyone_btn"
+        android:text="@string/for_other_group"
+        app:layout_constraintTop_toBottomOf="@id/for_whom_permission_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/create_permission_for_this_group_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/for_this_group"
+        app:layout_constraintTop_toBottomOf="@id/create_permission_for_everyone_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="5dp"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

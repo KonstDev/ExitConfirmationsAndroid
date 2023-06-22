@@ -1,4 +1,4 @@
-package com.example.exitconfirmationsandroid.fragments;
+package com.example.exitconfirmationsandroid.bottom_sheet_fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.exitconfirmationsandroid.databinding.StudentsChoosingFragmentBinding;
 
-public class StudentsChoosingFragment extends Fragment {
+public class AllStudentsChoosing extends Fragment {
 
     private StudentsChoosingFragmentBinding binding;
 
