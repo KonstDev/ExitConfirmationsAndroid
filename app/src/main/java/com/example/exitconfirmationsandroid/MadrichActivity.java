@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.exitconfirmationsandroid.animation.CreateFavBtnViewAnimation;
 import com.example.exitconfirmationsandroid.databinding.ActivityMadrichBinding;
 import com.example.exitconfirmationsandroid.exit_permissions.ExitPermission;
 import com.example.exitconfirmationsandroid.exit_permissions.ExitPermissionsAdapter;
@@ -29,6 +30,7 @@ import java.util.Date;
 public class MadrichActivity extends AppCompatActivity {
 
     private ActivityMadrichBinding binding;
+    private boolean fabRotating = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,13 @@ public class MadrichActivity extends AppCompatActivity {
 
         loadMadrichInfo();
         loadExitPermissions();
+
+        binding.addPermissionFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     public void loadMadrichInfo(){
@@ -72,8 +81,7 @@ public class MadrichActivity extends AppCompatActivity {
                         String weekEarlierDateString = dateFormat.format(weekEarlierDate);
 
                         ArrayList<ExitPermission> exitPermissions1 = new ArrayList<>();
-                       String[] exit_permissions = task.getResult().getValue().toString().split(",");
-                        Log.d("DB123123", String.valueOf(snapshot.child(snapshot.child(exit_permissions[0]).child("exitDate").getValue().toString())));
+                        String[] exit_permissions = task.getResult().getValue().toString().split(",");
                         for (int i = 0; i < exit_permissions.length; i++) {
                             boolean confirmed = Boolean.parseBoolean(snapshot.child(exit_permissions[i]).child("confirmed").getValue().toString());
                             String exitDate = snapshot.child(exit_permissions[i]).child("exitDate").getValue().toString();

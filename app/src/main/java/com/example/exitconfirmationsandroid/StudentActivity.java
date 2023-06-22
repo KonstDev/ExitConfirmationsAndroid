@@ -69,7 +69,7 @@ public class StudentActivity extends AppCompatActivity {
                         String weekEarlierDateString = dateFormat.format(weekEarlierDate);
 
                         ArrayList<ExitPermission> exitPermissions1 = new ArrayList<>();
-                        Log.d("XXXX","238746t237645");
+
                         String[] exit_permissions = task.getResult().getValue().toString().split(",");
                         for (int i = 0; i < exit_permissions.length; i++) {
                             boolean confirmed = Boolean.parseBoolean(snapshot.child(exit_permissions[i]).child("confirmed").getValue().toString());
