@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
+        android:maxWidth="250dp"
         android:textSize="9pt"
         app:layout_constraintStart_toEndOf="@+id/confirmed_view"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,7 +38,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/vector"
+        app:srcCompat="@drawable/mark_icon"
         />
 
     <TextView

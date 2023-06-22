@@ -12,7 +12,8 @@
     <string name="exit_time">זמן יציאה</string>
     <string name="return_time">זמן חזרה</string>
     <string name="group">קבוצה</string>
-    <string name="students_names">שמות התלמידים</string>
-    <string name="students_choosing">בחירת התלמידים</string>
+    <string name="students_names">שמות החניכים</string>
+    <string name="students_choosing">בחירת החניכים</string>
     <string name="continue_t">להמשיך</string>
+    <string name="for_whom_permission">למי הפתק? </string>
 </resources>
