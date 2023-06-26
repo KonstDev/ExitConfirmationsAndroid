@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.exitconfirmationsandroid.databinding.PermissionParametersChoosingFragmentBinding;
+import com.example.exitconfirmationsandroid.exit_permissions.ExitPermission;
 
 public class PermissionTypeChoosingFragment extends Fragment {
 
@@ -18,9 +19,12 @@ public class PermissionTypeChoosingFragment extends Fragment {
     private int frame_layout_id;
     private FragmentManager fragmentManager;
 
-    public PermissionTypeChoosingFragment(int frame_layout_id, FragmentManager fragmentManager) {
+    private ExitPermission exitPermission;
+
+    public PermissionTypeChoosingFragment(int frame_layout_id, FragmentManager fragmentManager, ExitPermission exitPermission) {
         this.frame_layout_id = frame_layout_id;
         this.fragmentManager = fragmentManager;
+        this.exitPermission = exitPermission;
     }
 
     @Nullable
@@ -31,7 +35,7 @@ public class PermissionTypeChoosingFragment extends Fragment {
         binding.createPermissionForThisGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentManager.beginTransaction().replace(frame_layout_id, new ChoosingStudentFromOneGroup()).commit();
+                fragmentManager.beginTransaction().replace(frame_layout_id, new ChoosingStudentFromOneGroup(exitPermission)).commit();
             }
         });
 

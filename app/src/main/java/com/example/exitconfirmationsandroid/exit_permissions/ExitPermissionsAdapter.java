@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.exitconfirmationsandroid.R;
+import com.example.exitconfirmationsandroid.bottomsheet.MadrichPermissionInfoBottomSheet;
 import com.example.exitconfirmationsandroid.bottomsheets.ShomerPermissionInfoBottomSheet;
 
 import java.util.ArrayList;
@@ -50,6 +51,11 @@ public class ExitPermissionsAdapter extends RecyclerView.Adapter<ExitPermissionV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (account_type==1){
+                    MadrichPermissionInfoBottomSheet bottomSheet = new MadrichPermissionInfoBottomSheet(exitPermissions.get(position));
+                    bottomSheet.show(supportFragmentManager, "bottomSheet");
+                }
+
                 //if the user is a shomer we open the bottom sheet
                 if (account_type == 3){
                     ShomerPermissionInfoBottomSheet bottomSheet = new ShomerPermissionInfoBottomSheet(exitPermissions.get(position));

@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.example.exitconfirmationsandroid.animation.CreateFavBtnViewAnimation;
+import com.example.exitconfirmationsandroid.bottomsheet.CreateExitPermissionBottomSheet;
 import com.example.exitconfirmationsandroid.databinding.ActivityMadrichBinding;
 import com.example.exitconfirmationsandroid.exit_permissions.ExitPermission;
 import com.example.exitconfirmationsandroid.exit_permissions.ExitPermissionsAdapter;
@@ -44,7 +44,8 @@ public class MadrichActivity extends AppCompatActivity {
         binding.addPermissionFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                CreateExitPermissionBottomSheet createExitPermissionBottomSheet = new CreateExitPermissionBottomSheet();
+                createExitPermissionBottomSheet.show(getSupportFragmentManager(), "CreateExitPermissionBottomSheet");
             }
         });
     }
@@ -119,7 +120,7 @@ public class MadrichActivity extends AppCompatActivity {
                         //setting up recycler view
                         binding.allPermissions.setLayoutManager(new LinearLayoutManager(MadrichActivity.this));
                         binding.allPermissions.addItemDecoration(new DividerItemDecoration(MadrichActivity.this, DividerItemDecoration.VERTICAL));
-                        binding.allPermissions.setAdapter(new ExitPermissionsAdapter(exitPermissions1, 3, getSupportFragmentManager()));
+                        binding.allPermissions.setAdapter(new ExitPermissionsAdapter(exitPermissions1, 1, getSupportFragmentManager()));
 
                         //disabling progress bar
                         binding.progressBar.setVisibility(View.GONE);

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.exitconfirmationsandroid.databinding.StudentsChoosingFragmentBinding;
+import com.example.exitconfirmationsandroid.exit_permissions.ExitPermission;
 import com.example.exitconfirmationsandroid.students.Student;
 import com.example.exitconfirmationsandroid.students.StudentsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +27,12 @@ import java.util.ArrayList;
 
 public class ChoosingStudentFromOneGroup extends Fragment {
     private StudentsChoosingFragmentBinding binding;
+
+    private ExitPermission exitPermission;
+
+    public ChoosingStudentFromOneGroup(ExitPermission exitPermission){
+        this.exitPermission = exitPermission;
+    }
 
     @Nullable
     @Override
@@ -55,7 +62,8 @@ public class ChoosingStudentFromOneGroup extends Fragment {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 for (String studentId: studentsStr){
-                                                    students.add(new Student(studentId, snapshot.child(studentId).child("name").getValue().toString(), false));
+                                                    students.add(new Student(studentId, snapshot.child(studentId).child("name").getValue().toString(),
+                                                            snapshot.child(studentId).getValue().toString(), true));
                                                 }
                                                 //setting recycler view
                                                 binding.studentsRv.setLayoutManager(new LinearLayoutManager(getContext()));
