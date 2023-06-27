@@ -62,8 +62,7 @@ public class ChoosingStudentFromOneGroup extends Fragment {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 for (String studentId: studentsStr){
-                                                    students.add(new Student(studentId, snapshot.child(studentId).child("name").getValue().toString(),
-                                                            snapshot.child(studentId).getValue().toString(), true));
+                                                    students.add(new Student(studentId, snapshot.child(studentId).child("name").getValue().toString(), snapshot.child(studentId).getValue().toString(), false));
                                                 }
                                                 //setting recycler view
                                                 binding.studentsRv.setLayoutManager(new LinearLayoutManager(getContext()));

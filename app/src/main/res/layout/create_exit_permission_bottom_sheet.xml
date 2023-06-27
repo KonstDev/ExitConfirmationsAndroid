@@ -13,27 +13,39 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="16dp" />
 
-    <TextView
-        style="@style/h1"
-        android:id="@+id/new_ep_tv"
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/back_fragment_btn"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:backgroundTint="@color/main_bg"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="32dp"
+        />
+
+    <TextView
+        android:id="@+id/new_ep_tv"
+        style="@style/h1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="ליצור פתק חדש"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintStart_toEndOf="@id/back_fragment_btn"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <ImageButton
         android:id="@+id/ivClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
         android:backgroundTint="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_close_24"
         android:padding="5dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="23dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:srcCompat="@drawable/baseline_close_24" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -43,5 +55,19 @@
         app:layout_constraintTop_toBottomOf="@id/new_ep_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="32dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="75dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
