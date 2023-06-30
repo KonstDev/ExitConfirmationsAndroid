@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,15 +17,13 @@ import com.example.exitconfirmationsandroid.exit_permissions.ExitPermission;
 public class PermissionTypeChoosingFragment extends Fragment {
 
     private PermissionParametersChoosingFragmentBinding binding;
-    private int frame_layout_id;
-    private FragmentManager fragmentManager;
+    private FrameSwitcherData frameSwitcherData;
 
-    private ExitPermission exitPermission;
+    private ImageButton go_back_btn;
 
-    public PermissionTypeChoosingFragment(int frame_layout_id, FragmentManager fragmentManager, ExitPermission exitPermission) {
-        this.frame_layout_id = frame_layout_id;
-        this.fragmentManager = fragmentManager;
-        this.exitPermission = exitPermission;
+    public PermissionTypeChoosingFragment(FrameSwitcherData frameSwitcherData, ImageButton go_back_btn) {
+        this.frameSwitcherData = frameSwitcherData;
+        this.go_back_btn = go_back_btn;
     }
 
     @Nullable
@@ -32,19 +31,23 @@ public class PermissionTypeChoosingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = PermissionParametersChoosingFragmentBinding.inflate(inflater, container, false);
 
+        //it's the first fragment so there is no fragments to go back
+        go_back_btn.setVisibility(View.GONE);
+
         binding.createPermissionForThisGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentManager.beginTransaction().replace(frame_layout_id, new ChoosingStudentFromOneGroup(exitPermission)).commit();
+                frameSwitcherData.fragmentManager.beginTransaction().replace(frameSwitcherData.frame_layout_id, new ChoosingStudentFromOneGroup(frameSwitcherData.exitPermission)).commit();
             }
         });
 
         binding.createPermissionForEveryoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentManager.beginTransaction().replace(frame_layout_id, new AllStudentsChoosing()).commit();
+                frameSwitcherData.fragmentManager.beginTransaction().replace(frameSwitcherData.frame_layout_id, new AllStudentsChoosing()).commit();
             }
         });
+
 
         return binding.getRoot();
     }
