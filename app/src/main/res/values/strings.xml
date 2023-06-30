@@ -18,4 +18,5 @@
     <string name="for_whom_permission">למי הפתק? </string>
     <string name="for_this_group">לתלמיד מכיתה הזאת</string>
     <string name="for_other_group">לכל תלמיד</string>
+    <string name="there_is_no_exit_permissions">אין אישורים בשבוע הזה</string>
 </resources>

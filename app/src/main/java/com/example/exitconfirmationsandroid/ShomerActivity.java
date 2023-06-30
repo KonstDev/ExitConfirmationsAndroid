@@ -60,22 +60,30 @@ public class ShomerActivity extends AppCompatActivity {
     public void loadExitPermissions() {
         FirebaseDatabase.getInstance().getReference("Guards").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("exit_permissions").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()){
-                FirebaseDatabase.getInstance().getReference("ExitPermissions").addListenerForSingleValueEvent(new ValueEventListener() {
+                FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        //if there is no exit permissions
+                        if (snapshot.child("ExitConfirmations").exists()){
+                            binding.thereIsNoExitPermissionsAlert.setVisibility(View.VISIBLE);
+                            return;
+                        }
+
+                        Calendar calendar = Calendar.getInstance();
+                        Date currentDate = calendar.getTime();
+
+                        // Calculate a week earlier date
+                        calendar.add(Calendar.WEEK_OF_YEAR, -1);
+                        Date weekEarlierDate = calendar.getTime();
+
+                        // Format date to match Firebase database format (yyyy-MM-dd)
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        String weekEarlierDateString = dateFormat.format(weekEarlierDate);
+
                         ArrayList<ExitPermission> exitPermissions1 = new ArrayList<>();
                         String[] exit_permissions = task.getResult().getValue().toString().split(",");
                         for (int i = 0; i < exit_permissions.length; i++) {
-                            Calendar calendar = Calendar.getInstance();
-                            Date currentDate = calendar.getTime();
-
-                            // Calculate a week earlier date
-                            calendar.add(Calendar.WEEK_OF_YEAR, -1);
-                            Date weekEarlierDate = calendar.getTime();
-
-                            // Format date to match Firebase database format (yyyy-MM-dd)
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                            String weekEarlierDateString = dateFormat.format(weekEarlierDate);
 
                             boolean confirmed = Boolean.parseBoolean((String) snapshot.child(exit_permissions[i]).child("confirmed").getValue());
                             String exitDate = snapshot.child(exit_permissions[i]).child("exitDate").getValue().toString();

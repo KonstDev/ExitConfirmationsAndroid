@@ -66,9 +66,20 @@ public class MadrichActivity extends AppCompatActivity {
     public void loadExitPermissions() {
         FirebaseDatabase.getInstance().getReference("Madrichs").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("exit_permissions").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()){
-                FirebaseDatabase.getInstance().getReference("ExitPermissions").addListenerForSingleValueEvent(new ValueEventListener() {
+                FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        //if there is no exit permissions
+                        if (!snapshot.child("ExitPermissions").exists()) {
+                            //disabling progress bar
+                            binding.progressBar.setVisibility(View.GONE);
+
+                            binding.thereIsNoExitPermissionsAlert.setVisibility(View.VISIBLE);
+                            return;
+                        }
+
+                        snapshot = snapshot.child("ExitPermissions");
 
                         Calendar calendar = Calendar.getInstance();
                         Date currentDate = calendar.getTime();

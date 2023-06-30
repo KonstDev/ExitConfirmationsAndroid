@@ -52,7 +52,6 @@ public class AllStudentsChoosing extends Fragment {
                                         snapshot1.getKey().toString(), false));
                             }
 
-                            StudentsAdapter adapter = new StudentsAdapter(students);
                             binding.studentsRv.setLayoutManager(new LinearLayoutManager(getContext()));
                             binding.studentsRv.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
                             binding.studentsRv.setAdapter(new StudentsAdapter(students));
