@@ -92,6 +92,7 @@ public class ShomerActivity extends AppCompatActivity {
                             String group = snapshot.child(exit_permissions[i]).child("group").getValue().toString();
                             String id = snapshot.child(exit_permissions[i]).child("id").getValue().toString();
                             String madrich_name = snapshot.child(exit_permissions[i]).child("madrich_name").getValue().toString();
+                            String madrich_id = snapshot.child(exit_permissions[i]).child("madrich_id").getValue().toString();
                             String returnDate = snapshot.child(exit_permissions[i]).child("returnDate").getValue().toString();
                             String returnTime = snapshot.child(exit_permissions[i]).child("returnTime").getValue().toString();
                             String students_ids = snapshot.child(exit_permissions[i]).child("students_ids").getValue().toString();
@@ -115,7 +116,7 @@ public class ShomerActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
-                            exitPermissions1.add(new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, returnDate, returnTime, students_ids, students_names));
+                            exitPermissions1.add(new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, madrich_id, returnDate, returnTime, students_ids, students_names));
                         }
 
                         //setting up recycler view

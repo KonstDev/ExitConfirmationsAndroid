@@ -37,14 +37,16 @@ public class PermissionTypeChoosingFragment extends Fragment {
         binding.createPermissionForThisGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                frameSwitcherData.fragmentManager.beginTransaction().replace(frameSwitcherData.frame_layout_id, new ChoosingStudentFromOneGroup(frameSwitcherData.exitPermission)).commit();
+                frameSwitcherData.fragmentManager.beginTransaction().replace(frameSwitcherData.frame_layout_id,
+                        new ChoosingStudentFromOneGroup(frameSwitcherData, go_back_btn)).commit();
             }
         });
 
         binding.createPermissionForEveryoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                frameSwitcherData.fragmentManager.beginTransaction().replace(frameSwitcherData.frame_layout_id, new AllStudentsChoosing()).commit();
+                frameSwitcherData.fragmentManager.beginTransaction().replace(frameSwitcherData.frame_layout_id,
+                        new AllStudentsChoosing(frameSwitcherData, go_back_btn)).commit();
             }
         });
 

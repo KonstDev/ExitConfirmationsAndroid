@@ -3,13 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingBottom="15dp">
+    android:paddingBottom="15dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".bottom_sheet_fragments.PermissionTypeChoosingFragment">
 
     <TextView
         android:id="@+id/for_whom_permission_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/for_whom_permission"
+        android:textColor="@color/black"
         style="@style/h1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,6 +24,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/create_permission_for_everyone_btn"
         android:text="@string/for_other_group"
+        android:backgroundTint="@color/additional_color"
         app:layout_constraintTop_toBottomOf="@id/for_whom_permission_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/for_this_group"
+        android:backgroundTint="@color/additional_color"
         app:layout_constraintTop_toBottomOf="@id/create_permission_for_everyone_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

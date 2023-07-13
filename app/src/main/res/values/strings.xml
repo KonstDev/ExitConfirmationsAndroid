@@ -9,8 +9,10 @@
     <string name="guard">שומר</string>
     <string name="accept">לאשר</string>
     <string name="going_to">יציאה ל</string>
-    <string name="exit_time">זמן יציאה</string>
-    <string name="return_time">זמן חזרה</string>
+    <string name="exit_time">זמן היציאה</string>
+    <string name="exit_date">יום היציאה</string>
+    <string name="return_date">יום החזרה</string>
+    <string name="return_time">זמן החזרה</string>
     <string name="group">קבוצה</string>
     <string name="students_names">שמות החניכים</string>
     <string name="students_choosing">בחירת החניכים</string>
@@ -19,4 +21,5 @@
     <string name="for_this_group">לתלמיד מכיתה הזאת</string>
     <string name="for_other_group">לכל תלמיד</string>
     <string name="there_is_no_exit_permissions">אין אישורים בשבוע הזה</string>
+    <string name="create_permission">ליצור פתק</string>
 </resources>

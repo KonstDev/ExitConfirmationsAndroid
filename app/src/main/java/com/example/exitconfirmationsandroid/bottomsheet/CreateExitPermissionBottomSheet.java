@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.exitconfirmationsandroid.bottom_sheet_fragments.FrameSwitcherData;
 import com.example.exitconfirmationsandroid.bottom_sheet_fragments.PermissionTypeChoosingFragment;
 import com.example.exitconfirmationsandroid.databinding.CreateExitPermissionBottomSheetBinding;
 import com.example.exitconfirmationsandroid.exit_permissions.ExitPermission;
@@ -34,23 +35,23 @@ public class CreateExitPermissionBottomSheet extends BottomSheetDialogFragment {
             }
         });
 
-        FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String id = Long.toString(snapshot.child("ExitPermissions").getChildrenCount());
                 String madrich_name = snapshot.child("Madrichs")
                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name").getValue().toString();
 
                 ExitPermission exitPermission = new ExitPermission();
-                exitPermission.id = id;
                 exitPermission.madrich_name = madrich_name;
+                exitPermission.madrich_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                 getChildFragmentManager().beginTransaction()
                         .replace(binding.createPermissionFragmentContainer.getId(),
                                 new PermissionTypeChoosingFragment(
-                                        binding.createPermissionFragmentContainer.getId(),
-                                        getChildFragmentManager(),
-                                        exitPermission
+                                        new FrameSwitcherData(getChildFragmentManager(),
+                                                exitPermission,
+                                                binding.createPermissionFragmentContainer.getId()),
+                                        binding.backFragmentBtn
                                 )
                         ).commit();
             }

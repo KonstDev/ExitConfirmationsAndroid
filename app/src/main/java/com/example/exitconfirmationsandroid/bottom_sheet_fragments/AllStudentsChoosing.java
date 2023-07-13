@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,21 +27,61 @@ public class AllStudentsChoosing extends Fragment {
 
     private StudentsChoosingFragmentBinding binding;
 
+    private FrameSwitcherData frameSwitcherData;
+    private ImageButton go_back_btn;
+
+    public AllStudentsChoosing(FrameSwitcherData frameSwitcherData, ImageButton go_back_btn) {
+        this.frameSwitcherData = frameSwitcherData;
+        this.go_back_btn = go_back_btn;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = StudentsChoosingFragmentBinding.inflate(inflater, container, false);
 
+        go_back_btn.setVisibility(View.VISIBLE);
 
         loadAllStudents();
 
+        binding.continueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //chosen students ids
+                String chosenStudentsIds = ((StudentsAdapter)binding.studentsRv.getAdapter()).getChosenStudentsIds();
+                if (chosenStudentsIds.equals("")){
+                    Toast.makeText(getContext(), "צריך לבחור לפחות תלמיד אחת", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                frameSwitcherData.exitPermission.students_ids = chosenStudentsIds;
+
+                //chosen students names
+                String chosenStudentsNames = ((StudentsAdapter)binding.studentsRv.getAdapter()).getChosenStudentsNames();
+                frameSwitcherData.exitPermission.students_names = chosenStudentsNames;
+
+                //setting group of the student/students
+                String groups = ((StudentsAdapter)binding.studentsRv.getAdapter()).getGroups();
+                frameSwitcherData.exitPermission.group = groups;
+
+                frameSwitcherData.fragmentManager.beginTransaction()
+                        .replace(frameSwitcherData.frame_layout_id, new ExitPermissionDetails(frameSwitcherData, go_back_btn)).commit();
+            }
+        });
+
+        go_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                frameSwitcherData.fragmentManager.beginTransaction()
+                        .replace(frameSwitcherData.frame_layout_id, new PermissionTypeChoosingFragment(frameSwitcherData, go_back_btn)).commit();
+            }
+        });
 
         return binding.getRoot();
     }
 
     private void loadAllStudents(){
         FirebaseDatabase.getInstance().getReference()
-                .addValueEventListener(new ValueEventListener() {
+                .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot snapshot1 : snapshot.child("Groups").getChildren()){

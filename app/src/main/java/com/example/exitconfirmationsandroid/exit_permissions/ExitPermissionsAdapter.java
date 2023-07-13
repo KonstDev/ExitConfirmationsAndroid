@@ -36,7 +36,7 @@ public class ExitPermissionsAdapter extends RecyclerView.Adapter<ExitPermissionV
 
     @Override
     public void onBindViewHolder(@NonNull ExitPermissionViewHolder holder, int position) {
-        //setting if the
+        //setting if the students is chosen of no
         if (exitPermissions.get(position).confirmed){
             holder.permission_confirmation_iv.setVisibility(View.VISIBLE);
         }else{
