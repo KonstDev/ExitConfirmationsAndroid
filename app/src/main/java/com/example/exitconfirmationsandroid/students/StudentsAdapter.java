@@ -106,8 +106,9 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder>{
         for (String group : groups){
             if (groupsStr.isEmpty()){
                 groupsStr=group;
+            }else {
+                groupsStr += "," + group;
             }
-            groupsStr += ","+group;
         }
         return groupsStr;
     }

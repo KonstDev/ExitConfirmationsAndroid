@@ -2,6 +2,7 @@ package com.example.exitconfirmationsandroid.bottom_sheet_fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +27,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.dynamiclinks.DynamicLink;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 
 import java.sql.Time;
 import java.util.Calendar;
@@ -123,7 +126,13 @@ public class ExitPermissionDetails extends Fragment {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
 
                     @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    public void onDateSet(DatePicker view, int year, int monthI, int dayOfMonthI) {
+                        String dayOfMonth = Integer.toString(dayOfMonthI);
+                        if (dayOfMonth.length()==1){
+                            dayOfMonth = "0"+dayOfMonth;
+                        }
+                        String month = Integer.toString(monthI);
+
                         //showing selected date
                         binding.returnDateTv.setText(dayOfMonth+"."+month+"."+year);
                     }
@@ -153,14 +162,19 @@ public class ExitPermissionDetails extends Fragment {
                                 Long exitPermissionId = snapshot.child("ExitPermissions").getChildrenCount()+1;
                                 frameSwitcherData.exitPermission.id = Long.toString(exitPermissionId);
 
+                                //filling the main information about exit permission and setting oncompletelistener if all gone well
                                 FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
                                         .setValue(frameSwitcherData.exitPermission.getAsHashMap())
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()){
+                                                    //for default exit permission is not confirmed
                                                     FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
                                                             .child("confirmed").setValue(false);
+
+                                                    FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
+                                                                    .child("confirmationLink").setValue(getDynamicLink(Long.toString(exitPermissionId)));
 
                                                     //adding exit permission to madrich's user permissions
                                                     FirebaseDatabase.getInstance().getReference().child("Madrichs").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -169,6 +183,11 @@ public class ExitPermissionDetails extends Fragment {
                                                                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                                                                     if (task.isSuccessful()){
                                                                         String user_exit_permissions = task.getResult().getValue().toString();
+                                                                        if (user_exit_permissions.isEmpty()){
+                                                                            user_exit_permissions = Long.toString(exitPermissionId);
+                                                                        }else{
+                                                                            user_exit_permissions += ","+Long.toString(exitPermissionId);
+                                                                        }
 
                                                                         FirebaseDatabase.getInstance().getReference().child("Madrichs").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                                                 .child("exit_permissions").setValue(user_exit_permissions);
@@ -185,7 +204,7 @@ public class ExitPermissionDetails extends Fragment {
                                                                                                 if (student_exit_permissions.isEmpty()){
                                                                                                     student_exit_permissions = Long.toString(exitPermissionId);
                                                                                                 }else{
-                                                                                                    student_exit_permissions = ","+Long.toString(exitPermissionId);
+                                                                                                    student_exit_permissions += ","+Long.toString(exitPermissionId);
                                                                                                 }
 
                                                                                                 FirebaseDatabase.getInstance().getReference().child("Students").child(studentId)
@@ -219,6 +238,9 @@ public class ExitPermissionDetails extends Fragment {
                                                 if (task.isSuccessful()){
                                                     FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
                                                                     .child("confirmed").setValue(false);
+
+                                                    FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
+                                                            .child("confirmationLink").setValue(getDynamicLink(Long.toString(exitPermissionId)));
 
                                                     //adding exit permission to all user's permissions
                                                     FirebaseDatabase.getInstance().getReference().child("Madrichs").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -287,5 +309,23 @@ public class ExitPermissionDetails extends Fragment {
         });
 
         return binding.getRoot();
+    }
+
+    private String getDynamicLink(String id){
+        Uri.Builder builder = new Uri.Builder();
+        DynamicLink link1 = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                .setLink(Uri.parse(
+                        "https://exitpermissions.com/?exitPermissionId=" + id
+                )).setDomainUriPrefix("https://exitconfirmations.page.link")
+                .setAndroidParameters(new DynamicLink.AndroidParameters.Builder().build()).buildDynamicLink();
+        Uri cacheLink = link1.getUri();
+        Uri link;
+        Uri.Builder uriBuilder = Uri.parse(cacheLink.toString()).buildUpon();
+        uriBuilder.appendQueryParameter(
+                "exitPermissionId",
+                id
+        );
+        link = uriBuilder.build();
+        return link.toString();
     }
 }

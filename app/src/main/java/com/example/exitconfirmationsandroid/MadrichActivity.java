@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -119,74 +120,83 @@ public class MadrichActivity extends AppCompatActivity {
                                             String students_names = snapshot.child(exit_permissions[i]).child("students_names").getValue().toString();
 
                                             // Combine exitDate and exitTime into a single DateTime string
-                                            String exitDateTimeString = exitDate + " " + exitTime;
+                                            String exitDateTimeString = returnDate + " " + returnTime;
 
                                             //EXIT PERMISSION CHECKING ON OUTDATING
                                             //TODO: FIX EXIT PERMISSION OUTDATE CHECKING
                                             SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-//                                            try {
-//                                                Date exitDateTime = dateTimeFormat.parse(exitDateTimeString);
-//
-//                                                // Check if exitDateTime is later than a week from the current date
-//                                                if (weekEarlierDate.after(exitDateTime)) {
-//                                                    int finalI = i;
-//                                                    FirebaseDatabase.getInstance().getReference()
-//                                                                    .addListenerForSingleValueEvent(new ValueEventListener() {
-//                                                                        @Override
-//                                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                                                                            String madrich_id = snapshot.child("ExitPermissions").child(exit_permissions[finalI])
-//                                                                                    .child("madrich_id").getValue().toString();
-//                                                                            String[] students_ids = snapshot.child("ExitPermissions").child(exit_permissions[finalI])
-//                                                                                    .child("students_ids").getValue().toString().split(",");
-//
-//                                                                            List<String> madrich_exit_permissions = Arrays.asList(snapshot.child("Madrichs").child(madrich_id)
-//                                                                                    .child("exit_permissions").getValue().toString().split(","));
-//                                                                            madrich_exit_permissions.remove(exit_permissions[finalI]);
-//
-//                                                                            String madrich_exit_permissions_str = "";
-//                                                                            for (String exitPermissionId : madrich_exit_permissions){
-//                                                                                if (madrich_exit_permissions_str.isEmpty()){
-//                                                                                    madrich_exit_permissions_str=exitPermissionId;
-//                                                                                }else{
-//                                                                                    madrich_exit_permissions_str+=","+exitPermissionId;
-//                                                                                }
-//                                                                            }
-//
-//                                                                            FirebaseDatabase.getInstance().getReference("Madrichs").child(madrich_id).child("exit_permissions")
-//                                                                                    .setValue(madrich_exit_permissions_str);
-//
-//                                                                            for (String student_id : students_ids){
-//                                                                                List<String> student_exit_permissions = Arrays.asList(snapshot.child("Students").child(student_id)
-//                                                                                        .child("exit_permissions").getValue().toString().split(","));
-//                                                                                student_exit_permissions.remove(exit_permissions[finalI]);
-//
-//                                                                                String student_exit_permissions_str = "";
-//                                                                                for (String exitPermissionId : student_exit_permissions){
-//                                                                                    if (student_exit_permissions_str.isEmpty()){
-//                                                                                        student_exit_permissions_str=exitPermissionId;
-//                                                                                    }else{
-//                                                                                        student_exit_permissions_str+=","+exitPermissionId;
-//                                                                                    }
-//                                                                                }
-//
-//                                                                                FirebaseDatabase.getInstance().getReference("Students").child(student_id).child("exit_permissions")
-//                                                                                        .setValue(student_exit_permissions_str);
-//                                                                            }
-//                                                                        }
-//
-//                                                                        @Override
-//                                                                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                                                                        }
-//                                                                    });
-//
-//                                                    // Delete the exit permission
+                                            try {
+                                                Date exitDateTime = dateTimeFormat.parse(exitDateTimeString);
+
+                                                // Check if exitDateTime is later than a week from the current date
+                                                if (exitDateTime.after(weekEarlierDate)) {
+                                                    int finalI = i;
+                                                    FirebaseDatabase.getInstance().getReference()
+                                                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                        @Override
+                                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                            String madrich_id = snapshot.child("ExitPermissions").child(exit_permissions[finalI])
+                                                                                    .child("madrich_id").getValue().toString();
+                                                                            String[] students_ids = snapshot.child("ExitPermissions").child(exit_permissions[finalI])
+                                                                                    .child("students_ids").getValue().toString().split(",");
+
+                                                                            List<String> madrich_exit_permissions = Arrays.asList(snapshot.child("Madrichs").child(madrich_id)
+                                                                                    .child("exit_permissions").getValue().toString().split(","));
+                                                                            Log.d("TAG", "MADRICH EXIT PERMISSIONS: " + madrich_exit_permissions.toString());
+                                                                            if (madrich_exit_permissions.contains(exit_permissions[finalI])){
+                                                                                Log.d("TAG", "POINT");
+                                                                                madrich_exit_permissions.remove(exit_permissions[finalI]);
+                                                                            }
+
+                                                                            String madrich_exit_permissions_str = "";
+                                                                            for (String exitPermissionId : madrich_exit_permissions){
+                                                                                if (madrich_exit_permissions_str.isEmpty()){
+                                                                                    madrich_exit_permissions_str=exitPermissionId;
+                                                                                }else{
+                                                                                    madrich_exit_permissions_str+=","+exitPermissionId;
+                                                                                }
+                                                                            }
+
+                                                                            for (String student_id : students_ids){
+                                                                                List<String> student_exit_permissions = Arrays.asList(snapshot.child("Students").child(student_id)
+                                                                                        .child("exit_permissions").getValue().toString().split(","));
+                                                                                if (student_exit_permissions.contains(exit_permissions[finalI])) {
+                                                                                    student_exit_permissions.remove(exit_permissions[finalI]);
+                                                                                }
+
+                                                                                String student_exit_permissions_str = "";
+                                                                                for (String exitPermissionId : student_exit_permissions){
+                                                                                    if (student_exit_permissions_str.isEmpty()){
+                                                                                        student_exit_permissions_str=exitPermissionId;
+                                                                                    }else{
+                                                                                        student_exit_permissions_str+=","+exitPermissionId;
+                                                                                    }
+                                                                                }
+
+                                                                                FirebaseDatabase.getInstance().getReference("Students").child(student_id).child("exit_permissions")
+                                                                                        .setValue(student_exit_permissions_str);
+                                                                            }
+
+                                                                            FirebaseDatabase.getInstance().getReference("Madrichs").child(madrich_id).child("exit_permissions")
+                                                                                    .setValue(madrich_exit_permissions_str);
+
+
+                                                                        }
+
+                                                                        @Override
+                                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                        }
+                                                                    });
+
+                                                    // Delete the exit permission
 //                                                    FirebaseDatabase.getInstance().getReference("ExitPermissions")
 //                                                            .child(exit_permissions[i]).removeValue();
-//                                                }
-//                                            } catch (ParseException e) {
-//                                                e.printStackTrace();
-//                                            }
+                                                    Log.d("TAG", "REMOVE: " + exit_permissions[i]);
+                                                }
+                                            } catch (ParseException e) {
+                                                e.printStackTrace();
+                                            }
 
                                             exitPermissions1.add(new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, madrich_id, returnDate, returnTime, students_ids, students_names));
                                         }
@@ -194,6 +204,7 @@ public class MadrichActivity extends AppCompatActivity {
                                         //setting up recycler view
                                         binding.allPermissions.setLayoutManager(new LinearLayoutManager(MadrichActivity.this));
                                         binding.allPermissions.addItemDecoration(new DividerItemDecoration(MadrichActivity.this, DividerItemDecoration.VERTICAL));
+                                        Collections.reverse(exitPermissions1);
                                         binding.allPermissions.setAdapter(new ExitPermissionsAdapter(exitPermissions1, 1, getSupportFragmentManager()));
 
                                         //disabling progress bar
