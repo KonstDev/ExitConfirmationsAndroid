@@ -110,7 +110,16 @@ public class ExitPermissionDetails extends Fragment {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
 
                     @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    public void onDateSet(DatePicker view, int year, int monthI, int dayOfMonthI) {
+                        String dayOfMonth = Integer.toString(dayOfMonthI);
+                        if (dayOfMonth.length()==1){
+                            dayOfMonth = "0"+dayOfMonth;
+                        }
+                        String month = Integer.toString(monthI);
+                        if (month.length()==1){
+                            month="0"+month;
+                        }
+
                         //showing selected date
                         binding.exitDateTv.setText(dayOfMonth+"."+month+"."+year);
                     }
@@ -132,6 +141,9 @@ public class ExitPermissionDetails extends Fragment {
                             dayOfMonth = "0"+dayOfMonth;
                         }
                         String month = Integer.toString(monthI);
+                        if (month.length()==1){
+                            month="0"+month;
+                        }
 
                         //showing selected date
                         binding.returnDateTv.setText(dayOfMonth+"."+month+"."+year);

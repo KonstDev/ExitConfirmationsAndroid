@@ -90,6 +90,7 @@ public class StudentActivity extends AppCompatActivity {
                             String returnTime = snapshot.child(exit_permissions[i]).child("returnTime").getValue().toString();
                             String students_ids = snapshot.child(exit_permissions[i]).child("students_ids").getValue().toString();
                             String students_names = snapshot.child(exit_permissions[i]).child("students_names").getValue().toString();
+                            String confirmationLink = snapshot.child(exit_permissions[i]).child("confirmationLink").getValue().toString();
 
                             // Combine exitDate and exitTime into a single DateTime string
                             String exitDateTimeString = exitDate + " " + exitTime;
@@ -109,7 +110,7 @@ public class StudentActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
-                            exitPermissions1.add(new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, madrich_id, returnDate, returnTime, students_ids, students_names));
+                            exitPermissions1.add(new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, madrich_id, returnDate, returnTime, students_ids, students_names, confirmationLink));
                         }
 
                         //setting up recycler view

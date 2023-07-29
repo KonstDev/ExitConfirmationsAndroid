@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.exitconfirmationsandroid.R;
 import com.example.exitconfirmationsandroid.bottomsheet.MadrichPermissionInfoBottomSheet;
-import com.example.exitconfirmationsandroid.bottomsheets.ShomerPermissionInfoBottomSheet;
+import com.example.exitconfirmationsandroid.bottomsheet.ShomerPermissionInfoBottomSheet;
 
 import java.util.ArrayList;
 

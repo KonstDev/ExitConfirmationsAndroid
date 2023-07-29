@@ -1,4 +1,4 @@
-package com.example.exitconfirmationsandroid.bottomsheets;
+package com.example.exitconfirmationsandroid.bottomsheet;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,11 @@ import androidx.annotation.Nullable;
 import com.example.exitconfirmationsandroid.R;
 import com.example.exitconfirmationsandroid.databinding.ConfirmationInfoShomerBottomSheetBinding;
 import com.example.exitconfirmationsandroid.exit_permissions.ExitPermission;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ShomerPermissionInfoBottomSheet extends BottomSheetDialogFragment {
@@ -56,6 +60,25 @@ public class ShomerPermissionInfoBottomSheet extends BottomSheetDialogFragment {
             public void onClick(View v) {
                 FirebaseDatabase.getInstance().getReference("ExitPermissions")
                         .child(exitPermission.id).child("confirmed").setValue(true);
+
+                FirebaseDatabase.getInstance().getReference("Guards").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .child("exit_permissions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (task.isSuccessful()){
+                                    String exit_permissions = task.getResult().getValue().toString();
+
+                                    if (exit_permissions.isEmpty()){
+                                        exit_permissions = exitPermission.id;
+                                    }else{
+                                        exit_permissions += ","+exitPermission.id;
+                                    }
+
+                                    FirebaseDatabase.getInstance().getReference("Guards").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .child("exit_permissions").setValue(exit_permissions);
+                                }
+                            }
+                        });
 
                 dismiss();
             }
