@@ -84,20 +84,19 @@ public class AllStudentsChoosing extends Fragment {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        ArrayList<Student> students = new ArrayList<>();
                         for (DataSnapshot snapshot1 : snapshot.child("Groups").getChildren()){
                             String[] studentsStr = snapshot1.getValue().toString().split(",");
-                            ArrayList<Student> students = new ArrayList<>();
 
                             for (String studentId : studentsStr){
                                 DataSnapshot studentSnapshot = snapshot.child("Students").child(studentId);
                                 students.add(new Student(studentId, studentSnapshot.child("name").getValue().toString(),
                                         snapshot1.getKey().toString(), false));
                             }
-
-                            binding.studentsRv.setLayoutManager(new LinearLayoutManager(getContext()));
-                            binding.studentsRv.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-                            binding.studentsRv.setAdapter(new StudentsAdapter(students));
                         }
+                        binding.studentsRv.setLayoutManager(new LinearLayoutManager(getContext()));
+                        binding.studentsRv.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+                        binding.studentsRv.setAdapter(new StudentsAdapter(students));
                     }
 
                     @Override
