@@ -158,6 +158,7 @@ public class ShomerActivity extends AppCompatActivity {
                 }
             });
 
+
     public void loadGuardInfo(){
         binding.progressBar.setVisibility(View.VISIBLE);
         FirebaseDatabase.getInstance().getReference("Guards").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name")
