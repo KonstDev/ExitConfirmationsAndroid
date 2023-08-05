@@ -1,5 +1,6 @@
 package com.example.exitconfirmationsandroid.bottomsheet;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import com.example.exitconfirmationsandroid.R;
 import com.example.exitconfirmationsandroid.databinding.ConfirmationInfoMadrichBottomSheetBinding;
 import com.example.exitconfirmationsandroid.exit_permissions.ExitPermission;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.zxing.BarcodeFormat;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class MadrichPermissionInfoBottomSheet extends BottomSheetDialogFragment {
 
@@ -42,6 +45,21 @@ public class MadrichPermissionInfoBottomSheet extends BottomSheetDialogFragment 
         binding.returnTime.setText(getString(R.string.return_time) + ": "+exitPermission.returnTime + " " + exitPermission.returnDate);
         binding.goingTo.setText(getString(R.string.going_to) + ": "+exitPermission.goingTo);
         binding.groupTv.setText(getString(R.string.group) + ": "+exitPermission.group);
+
+        binding.showQrCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                    Bitmap bitmap = barcodeEncoder.encodeBitmap(exitPermission.confirmationLink, BarcodeFormat.QR_CODE, 400, 400);
+                    binding.qrCodeIv.setImageBitmap(bitmap);
+                    binding.qrCodeIv.setVisibility(View.VISIBLE);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+                binding.showQrCode.setVisibility(View.GONE);
+            }
+        });
 
         return binding.getRoot();
     }

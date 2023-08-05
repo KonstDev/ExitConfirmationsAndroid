@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -49,6 +50,16 @@ public class MadrichActivity extends AppCompatActivity {
             public void onClick(View v) {
                 CreateExitPermissionBottomSheet createExitPermissionBottomSheet = new CreateExitPermissionBottomSheet();
                 createExitPermissionBottomSheet.show(getSupportFragmentManager(), "CreateExitPermissionBottomSheet");
+            }
+        });
+
+        binding.refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadMadrichInfo();
+                loadExitPermissions();
+
+                binding.refresh.setRefreshing(false);
             }
         });
     }
@@ -114,9 +125,6 @@ public class MadrichActivity extends AppCompatActivity {
                                             binding.thereIsNoExitPermissionsAlert.setVisibility(View.GONE);
                                         }
 
-                                        String madrichExitPermissions = snapshot1.getValue().toString();
-
-
                                         ArrayList<ExitPermission> exitPermissions1 = new ArrayList<>();
                                         List<String> exit_permissions = Arrays.stream(snapshot1.getValue().toString().split(",")).collect(Collectors.toList());
                                         for (int i = 0; i < exit_permissions.size(); i++) {
@@ -148,34 +156,9 @@ public class MadrichActivity extends AppCompatActivity {
                                                 if (isExitPermissionOutdated(returnDateTimeString)) {
                                                     int finalI = i;
 
-                                                    String[] students_ids_arr = students_ids.split(",");
-
-
-
-                                                    for (String student_id : students_ids_arr){
-                                                        ArrayList<String> student_exit_permissions = new ArrayList<>(Arrays.asList(snapshot.child("Students").child("4L952vfexVWyt9y0eiTKu4Chh6z1")
-                                                                .child("exit_permissions").getValue().toString().split(",")));
-                                                        if (student_exit_permissions.contains(exit_permissions.get(finalI))) {
-                                                            student_exit_permissions.remove(exit_permissions.get(finalI));
-                                                        }
-
-                                                        String student_exit_permissions_str = "";
-                                                        for (String exitPermissionId : student_exit_permissions){
-                                                            if (student_exit_permissions_str.isEmpty()){
-                                                                student_exit_permissions_str=exitPermissionId;
-                                                            }else{
-                                                                student_exit_permissions_str+=","+exitPermissionId;
-                                                            }
-                                                        }
-
-                                                        FirebaseDatabase.getInstance().getReference("Students").child(student_id).child("exit_permissions")
-                                                                .setValue(student_exit_permissions_str);
-                                                    }
-
                                                     // Delete the exit permission
                                                     FirebaseDatabase.getInstance().getReference("ExitPermissions")
                                                             .child(exit_permissions.get(i)).removeValue();
-                                                    Log.d("TAG", "REMOVE: " + exit_permissions.get(i));
 
 
                                                     if (exit_permissions.contains(exit_permissions.get(finalI))){

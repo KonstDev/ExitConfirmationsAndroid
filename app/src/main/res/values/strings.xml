@@ -22,4 +22,5 @@
     <string name="for_other_group">לכל תלמיד</string>
     <string name="there_is_no_exit_permissions">אין אישורים בשבוע הזה</string>
     <string name="create_permission">ליצור פתק</string>
+    <string name="show_qr_code">לפתוח קוד qr</string>
 </resources>

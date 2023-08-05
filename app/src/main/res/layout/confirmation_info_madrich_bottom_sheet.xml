@@ -74,6 +74,32 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="32dp"/>
 
+    <ImageView
+        android:id="@+id/qr_code_iv"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="15dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_tv"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <Button
+        android:id="@+id/show_qr_code"
+        style="@style/base_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/additional_color"
+        android:paddingStart="60dp"
+        android:paddingEnd="60dp"
+        android:text="@string/show_qr_code"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qr_code_iv" />
+
     <ImageButton
         android:id="@+id/ivClose"
         android:layout_width="wrap_content"

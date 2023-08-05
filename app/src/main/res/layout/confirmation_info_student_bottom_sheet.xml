@@ -21,7 +21,7 @@
 
     <TextView
         style="@style/bhText"
-        android:id="@+id/madrich_tv"
+        android:id="@+id/group_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -38,7 +38,7 @@
         android:layout_marginTop="15dp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/madrich_tv"
+        app:layout_constraintTop_toBottomOf="@+id/group_tv"
         tools:text="exit time, exit date" />
     <TextView
         style="@style/bhText"
@@ -74,21 +74,31 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="32dp"/>
 
-    <Button
-        style="@style/bhText"
-        android:textColor="@color/white"
-        android:id="@+id/btnAccept"
-        android:backgroundTint="@color/additional_color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/qr_code_iv"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="20dp"
-        android:paddingStart="60dp"
-        android:paddingEnd="60dp"
-        android:text="@string/accept"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/madrichbottom_tv"
-        />
+        tools:src="@drawable/ic_launcher_background" />
+
+    <Button
+        android:id="@+id/show_qr_code"
+        style="@style/base_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/additional_color"
+        android:paddingStart="60dp"
+        android:paddingEnd="60dp"
+        android:text="@string/show_qr_code"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qr_code_iv" />
 
     <ImageButton
         android:id="@+id/ivClose"

@@ -32,6 +32,7 @@ import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 
 import java.sql.Time;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ExitPermissionDetails extends Fragment {
 
@@ -170,137 +171,73 @@ public class ExitPermissionDetails extends Fragment {
                     FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.child("ExitPermissions").exists()){
-                                Long exitPermissionId = snapshot.child("ExitPermissions").getChildrenCount()+1;
-                                frameSwitcherData.exitPermission.id = Long.toString(exitPermissionId);
+                            Long exitPermissionId = new Date().getTime();
+                            frameSwitcherData.exitPermission.id = Long.toString(exitPermissionId);
 
-                                //filling the main information about exit permission and setting oncompletelistener if all gone well
-                                FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
-                                        .setValue(frameSwitcherData.exitPermission.getAsHashMap())
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()){
-                                                    //for default exit permission is not confirmed
-                                                    FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
-                                                            .child("confirmed").setValue(false);
+                            //filling the main information about exit permission and setting oncompletelistener if all gone well
+                            FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
+                                    .setValue(frameSwitcherData.exitPermission.getAsHashMap())
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+                                                //for default exit permission is not confirmed
+                                                FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
+                                                        .child("confirmed").setValue(false);
 
-                                                    FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
-                                                                    .child("confirmationLink").setValue(getDynamicLink(Long.toString(exitPermissionId)));
+                                                FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
+                                                        .child("confirmationLink").setValue(getDynamicLink(Long.toString(exitPermissionId)));
 
-                                                    //adding exit permission to madrich's user permissions
-                                                    FirebaseDatabase.getInstance().getReference().child("Madrichs").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                            .child("exit_permissions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                                                    if (task.isSuccessful()){
-                                                                        String user_exit_permissions = task.getResult().getValue().toString();
-                                                                        if (user_exit_permissions.isEmpty()){
-                                                                            user_exit_permissions = Long.toString(exitPermissionId);
-                                                                        }else{
-                                                                            user_exit_permissions += ","+Long.toString(exitPermissionId);
-                                                                        }
-
-                                                                        FirebaseDatabase.getInstance().getReference().child("Madrichs").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                                                .child("exit_permissions").setValue(user_exit_permissions);
-
-                                                                        //adding exit permission to student's exit permissions for all students
-                                                                        String[] students = frameSwitcherData.exitPermission.students_ids.split(",");
-                                                                        for (String studentId : students){
-                                                                            FirebaseDatabase.getInstance().getReference().child("Students").child(studentId)
-                                                                                    .child("exit_permissions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                                                                        @Override
-                                                                                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                                                                            if (task.isSuccessful()){
-                                                                                                String student_exit_permissions = task.getResult().getValue().toString();
-                                                                                                if (student_exit_permissions.isEmpty()){
-                                                                                                    student_exit_permissions = Long.toString(exitPermissionId);
-                                                                                                }else{
-                                                                                                    student_exit_permissions += ","+Long.toString(exitPermissionId);
-                                                                                                }
-
-                                                                                                FirebaseDatabase.getInstance().getReference().child("Students").child(studentId)
-                                                                                                        .child("exit_permissions").setValue(student_exit_permissions);
-                                                                                            }else{
-                                                                                                Toast.makeText(getContext(), "Error accessing database", Toast.LENGTH_SHORT).show();
-                                                                                            }
-                                                                                        }
-                                                                                    });
-                                                                        }
-                                                                        ((BottomSheetDialogFragment)getParentFragment()).dismiss();
+                                                //adding exit permission to madrich's user permissions
+                                                FirebaseDatabase.getInstance().getReference().child("Madrichs").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                        .child("exit_permissions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                                                if (task.isSuccessful()){
+                                                                    String user_exit_permissions = task.getResult().getValue().toString();
+                                                                    if (user_exit_permissions.isEmpty()){
+                                                                        user_exit_permissions = Long.toString(exitPermissionId);
                                                                     }else{
-                                                                        Toast.makeText(getContext(), "Failed accessing database", Toast.LENGTH_SHORT).show();
+                                                                        user_exit_permissions += ","+Long.toString(exitPermissionId);
                                                                     }
-                                                                }
-                                                            });
-                                                }else{
-                                                    Toast.makeText(getContext(), "Error creating exit permission", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
-                            }else{
-                                Long exitPermissionId = Long.valueOf(0);
-                                frameSwitcherData.exitPermission.id = Long.toString(exitPermissionId);
 
-                                FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
-                                        .setValue(frameSwitcherData.exitPermission.getAsHashMap())
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()){
-                                                    FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
-                                                                    .child("confirmed").setValue(false);
+                                                                    FirebaseDatabase.getInstance().getReference().child("Madrichs").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                                            .child("exit_permissions").setValue(user_exit_permissions);
 
-                                                    FirebaseDatabase.getInstance().getReference().child("ExitPermissions").child(Long.toString(exitPermissionId))
-                                                            .child("confirmationLink").setValue(getDynamicLink(Long.toString(exitPermissionId)));
-
-                                                    //adding exit permission to all user's permissions
-                                                    FirebaseDatabase.getInstance().getReference().child("Madrichs").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                            .child("exit_permissions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                                                    if (task.isSuccessful()){
-                                                                        String user_exit_permissions = task.getResult().getValue().toString();
-                                                                        user_exit_permissions+="0";
-
-                                                                        FirebaseDatabase.getInstance().getReference().child("Madrichs").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                                                .child("exit_permissions").setValue(user_exit_permissions);
-
-                                                                        //adding exit permission to student's exit permissions for all students
-                                                                        String[] students = frameSwitcherData.exitPermission.students_ids.split(",");
-                                                                        for (String studentId : students){
-                                                                            FirebaseDatabase.getInstance().getReference().child("Students").child(studentId)
-                                                                                    .child("exit_permissions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                                                                        @Override
-                                                                                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                                                                            if (task.isSuccessful()){
-                                                                                                String student_exit_permissions = task.getResult().getValue().toString();
-                                                                                                if (student_exit_permissions.isEmpty()){
-                                                                                                    student_exit_permissions = Long.toString(exitPermissionId);
-                                                                                                }else{
-                                                                                                    student_exit_permissions = ","+Long.toString(exitPermissionId);
-                                                                                                }
-
-                                                                                                FirebaseDatabase.getInstance().getReference().child("Students").child(studentId)
-                                                                                                        .child("exit_permissions").setValue(student_exit_permissions);
+                                                                    //adding exit permission to student's exit permissions for all students
+                                                                    String[] students = frameSwitcherData.exitPermission.students_ids.split(",");
+                                                                    for (String studentId : students){
+                                                                        FirebaseDatabase.getInstance().getReference().child("Students").child(studentId)
+                                                                                .child("exit_permissions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                                                                    @Override
+                                                                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                                                                        if (task.isSuccessful()){
+                                                                                            String student_exit_permissions = task.getResult().getValue().toString();
+                                                                                            if (student_exit_permissions.isEmpty()){
+                                                                                                student_exit_permissions = Long.toString(exitPermissionId);
                                                                                             }else{
-                                                                                                Toast.makeText(getContext(), "Error accessing database", Toast.LENGTH_SHORT).show();
+                                                                                                student_exit_permissions += ","+Long.toString(exitPermissionId);
                                                                                             }
+
+                                                                                            FirebaseDatabase.getInstance().getReference().child("Students").child(studentId)
+                                                                                                    .child("exit_permissions").setValue(student_exit_permissions);
+                                                                                        }else{
+                                                                                            Toast.makeText(getContext(), "Error accessing database", Toast.LENGTH_SHORT).show();
                                                                                         }
-                                                                                    });
-                                                                        }
-                                                                        ((BottomSheetDialogFragment)getParentFragment()).dismiss();
-                                                                    }else{
-                                                                        Toast.makeText(getContext(), "Error accessing database", Toast.LENGTH_SHORT).show();
+                                                                                    }
+                                                                                });
                                                                     }
+                                                                    ((BottomSheetDialogFragment)getParentFragment()).dismiss();
+                                                                }else{
+                                                                    Toast.makeText(getContext(), "Failed accessing database", Toast.LENGTH_SHORT).show();
                                                                 }
-                                                            });
-                                                }else{
-                                                    Toast.makeText(getContext(), "Error creating exit permission", Toast.LENGTH_SHORT).show();
-                                                }
+                                                            }
+                                                        });
+                                            }else{
+                                                Toast.makeText(getContext(), "Error creating exit permission", Toast.LENGTH_SHORT).show();
                                             }
-                                        });
-                            }
+                                        }
+                                    });
                         }
 
                         @Override
