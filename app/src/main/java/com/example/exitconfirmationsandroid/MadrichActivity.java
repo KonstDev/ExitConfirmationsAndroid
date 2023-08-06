@@ -149,8 +149,6 @@ public class MadrichActivity extends AppCompatActivity {
                                             // Combine exitDate and exitTime into a single DateTime string
                                             String returnDateTimeString = returnDate + " " + returnTime;
 
-                                            exitPermissions1.add(new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, madrich_id, returnDate, returnTime, students_ids, students_names, confirmationLink));
-
                                             //EXIT PERMISSION CHECKING ON OUTDATING
                                             try {
                                                 if (isExitPermissionOutdated(returnDateTimeString)) {
@@ -170,6 +168,8 @@ public class MadrichActivity extends AppCompatActivity {
                                             } catch (ParseException e) {
                                                 throw new RuntimeException(e);
                                             }
+
+                                            exitPermissions1.add(new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, madrich_id, returnDate, returnTime, students_ids, students_names, confirmationLink));
                                         }
 
                                         String madrich_exit_permissions_str = "";
