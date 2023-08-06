@@ -162,14 +162,12 @@ public class MadrichActivity extends AppCompatActivity {
                                                     if (exit_permissions.contains(exit_permissions.get(finalI))){
                                                         exit_permissions.remove(exit_permissions.get(finalI));
                                                     }
-
-
+                                                }else{
+                                                    exitPermissions1.add(new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, madrich_id, returnDate, returnTime, students_ids, students_names, confirmationLink));
                                                 }
                                             } catch (ParseException e) {
                                                 throw new RuntimeException(e);
                                             }
-
-                                            exitPermissions1.add(new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, madrich_id, returnDate, returnTime, students_ids, students_names, confirmationLink));
                                         }
 
                                         String madrich_exit_permissions_str = "";
