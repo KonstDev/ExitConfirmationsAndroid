@@ -11,7 +11,7 @@ import com.example.exitconfirmationsandroid.R;
 
 public class StudentsViewHolder extends RecyclerView.ViewHolder{
 
-    TextView student_name;
+    TextView student_name, student_group;
     ImageView student_selection;
 
     public StudentsViewHolder(@NonNull View itemView) {
@@ -19,5 +19,6 @@ public class StudentsViewHolder extends RecyclerView.ViewHolder{
 
         student_name = itemView.findViewById(R.id.student_name);
         student_selection = itemView.findViewById(R.id.student_selection_iv);
+        student_group = itemView.findViewById(R.id.student_group_tv);
     }
 }

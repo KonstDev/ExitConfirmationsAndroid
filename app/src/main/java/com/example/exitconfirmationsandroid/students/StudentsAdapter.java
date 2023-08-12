@@ -36,6 +36,8 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull StudentsViewHolder holder, int position) {
         holder.student_name.setText(students.get(position).name);
+        holder.student_group.setText(students.get(position).group);
+
         if (students.get(position).selected) {
             holder.student_selection.setVisibility(View.VISIBLE);
         }else{
