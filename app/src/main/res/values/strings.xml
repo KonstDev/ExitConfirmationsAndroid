@@ -18,7 +18,7 @@
     <string name="students_choosing">בחירת החניכים</string>
     <string name="continue_t">להמשיך</string>
     <string name="for_whom_permission">למי הפתק? </string>
-    <string name="for_this_group">לתלמיד מכיתה הזאת</string>
+    <string name="for_this_group">לתלמיד מקבוצה הזאת</string>
     <string name="for_other_group">לכל תלמיד</string>
     <string name="there_is_no_exit_permissions">אין אישורים בשבוע הזה</string>
     <string name="create_permission">ליצור פתק</string>
