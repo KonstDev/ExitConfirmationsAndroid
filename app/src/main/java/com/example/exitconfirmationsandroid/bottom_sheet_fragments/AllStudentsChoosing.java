@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -73,6 +74,20 @@ public class AllStudentsChoosing extends Fragment {
             public void onClick(View v) {
                 frameSwitcherData.fragmentManager.beginTransaction()
                         .replace(frameSwitcherData.frame_layout_id, new PermissionTypeChoosingFragment(frameSwitcherData, go_back_btn)).commit();
+            }
+        });
+
+        binding.studentsSearchv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                StudentsAdapter studentsAdapter = (StudentsAdapter) binding.studentsRv.getAdapter();
+                studentsAdapter.filter(newText);
+                return true;
             }
         });
 

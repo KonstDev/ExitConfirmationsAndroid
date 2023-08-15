@@ -18,12 +18,14 @@ import java.util.Set;
 public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder>{
 
     public ArrayList<Student> students;
+    public ArrayList<Student> filteredStudents = new ArrayList<>();
 
     private ArrayList<String> chosenStudentsIds = new ArrayList<>(); //for collecting ids of chosen students
     private ArrayList<String> chosenStudentsNames = new ArrayList<>(); //for collecting names of chosen students
 
     public StudentsAdapter(ArrayList<Student> students){
         this.students = students;
+        this.filteredStudents = students;
     }
 
     @NonNull
@@ -35,10 +37,10 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull StudentsViewHolder holder, int position) {
-        holder.student_name.setText(students.get(position).name);
-        holder.student_group.setText(students.get(position).group);
+        holder.student_name.setText(filteredStudents.get(position).name);
+        holder.student_group.setText(filteredStudents.get(position).group);
 
-        if (students.get(position).selected) {
+        if (filteredStudents.get(position).selected) {
             holder.student_selection.setVisibility(View.VISIBLE);
         }else{
             holder.student_selection.setVisibility(View.GONE);
@@ -48,17 +50,18 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder>{
             @Override
             public void onClick(View v) {
                 //if the student was already chosen
-                if (students.get(position).selected){
-                    students.get(position).selected = false;
-                    chosenStudentsIds.remove(students.get(position).id);
-                    chosenStudentsNames.remove(students.get(position).name);
+                int index = students.indexOf(filteredStudents.get(position));
+                if (students.get(index).selected){
+                    students.get(index).selected = false;
+                    chosenStudentsIds.remove(filteredStudents.get(position).id);
+                    chosenStudentsNames.remove(filteredStudents.get(position).name);
                     holder.student_selection.setVisibility(View.GONE);
                 }
                 //if the student wasn't already chosen
                 else{
-                    students.get(position).selected = true;
-                    chosenStudentsIds.add(students.get(position).id);
-                    chosenStudentsNames.add(students.get(position).name);
+                    students.get(index).selected = true;
+                    chosenStudentsIds.add(filteredStudents.get(position).id);
+                    chosenStudentsNames.add(filteredStudents.get(position).name);
                     holder.student_selection.setVisibility(View.VISIBLE);
                 }
             }
@@ -67,7 +70,7 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder>{
 
     @Override
     public int getItemCount() {
-        return students.size();
+        return filteredStudents.size();
     }
 
 
@@ -98,7 +101,7 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder>{
     public String getGroups(){
         //we're creating set to have unique elements
         Set<String> groups = new HashSet<>();
-        for (Student student : students){
+        for (Student student : filteredStudents){
             if (student.selected){
                 groups.add(student.group);
             }
@@ -113,5 +116,25 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder>{
             }
         }
         return groupsStr;
+    }
+
+    public void filter(String filter){
+        filteredStudents = new ArrayList<>();
+
+        if (filter.isEmpty()){
+            filteredStudents = students;
+            notifyDataSetChanged();
+            return;
+        }
+
+        filter = filter.toLowerCase();
+
+        for (Student student: students){
+            if (student.name.toLowerCase().contains(filter) || student.group.equals(filter)){
+                filteredStudents.add(student);
+            }
+        }
+
+        notifyDataSetChanged();
     }
 }

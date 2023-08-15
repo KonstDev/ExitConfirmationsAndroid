@@ -51,52 +51,6 @@ public class ShomerActivity extends AppCompatActivity {
         loadGuardInfo();
         loadExitPermissions();
 
-        FirebaseDynamicLinks.getInstance().getDynamicLink(getIntent()).addOnSuccessListener(new OnSuccessListener<PendingDynamicLinkData>() {
-            @Override
-            public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
-                Uri deepLink = null;
-                if (pendingDynamicLinkData!=null){
-                    deepLink = pendingDynamicLinkData.getLink();
-                }
-                if (deepLink!=null){
-                    String exitPermissionId = deepLink.getQueryParameter("exitPermissionId");
-
-                    FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.child("ExitPermissions").child(exitPermissionId).exists()){
-                                snapshot = snapshot.child("ExitPermissions").child(exitPermissionId);
-
-                                String confirmationLink = snapshot.child("confirmationLink").getValue().toString();
-                                boolean confirmed = Boolean.parseBoolean(snapshot.child("confirmed").getValue().toString());
-                                String exitDate = snapshot.child("exitDate").getValue().toString();
-                                String exitTime = snapshot.child("exitTime").getValue().toString();
-                                String goingTo = snapshot.child("goingTo").getValue().toString();
-                                String group = snapshot.child("group").getValue().toString();
-                                String id = snapshot.child("id").getValue().toString();
-                                String madrich_id = snapshot.child("madrich_id").getValue().toString();
-                                String madrich_name = snapshot.child("madrich_name").getValue().toString();
-                                String returnDate = snapshot.child("returnDate").getValue().toString();
-                                String returnTime = snapshot.child("returnTime").getValue().toString();
-                                String students_ids = snapshot.child("students_ids").getValue().toString();
-                                String students_names = snapshot.child("students_names").getValue().toString();
-
-                                ShomerPermissionInfoBottomSheet shomerPermissionInfoBottomSheet =
-                                        new ShomerPermissionInfoBottomSheet(
-                                                new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, madrich_id, returnDate, returnTime, students_ids, students_names, confirmationLink));
-                                shomerPermissionInfoBottomSheet.show(getSupportFragmentManager(), "shomer bs");
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                }
-            }
-        });
-
         binding.refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -121,7 +75,7 @@ public class ShomerActivity extends AppCompatActivity {
                 if(result.getContents() == null) {
                     Toast.makeText(getApplicationContext(), "Cancelled", Toast.LENGTH_LONG).show();
                 } else {
-                    String exitPermissionId = Uri.parse(result.getContents()).getQueryParameter("exitPermissionId");
+                    String exitPermissionId = result.getContents();
 
                     FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override

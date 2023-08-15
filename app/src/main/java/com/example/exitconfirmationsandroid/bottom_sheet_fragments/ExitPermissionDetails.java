@@ -261,20 +261,6 @@ public class ExitPermissionDetails extends Fragment {
     }
 
     private String getDynamicLink(String id){
-        Uri.Builder builder = new Uri.Builder();
-        DynamicLink link1 = FirebaseDynamicLinks.getInstance().createDynamicLink()
-                .setLink(Uri.parse(
-                        "https://exitpermissions.com/?exitPermissionId=" + id
-                )).setDomainUriPrefix("https://exitconfirmations.page.link")
-                .setAndroidParameters(new DynamicLink.AndroidParameters.Builder().build()).buildDynamicLink();
-        Uri cacheLink = link1.getUri();
-        Uri link;
-        Uri.Builder uriBuilder = Uri.parse(cacheLink.toString()).buildUpon();
-        uriBuilder.appendQueryParameter(
-                "exitPermissionId",
-                id
-        );
-        link = uriBuilder.build();
-        return link.toString();
+        return id;
     }
 }
