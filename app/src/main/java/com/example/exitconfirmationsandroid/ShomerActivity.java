@@ -1,5 +1,12 @@
 package com.example.exitconfirmationsandroid;
 
+
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,25 +14,17 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
-
 import com.example.exitconfirmationsandroid.bottomsheet.ShomerPermissionInfoBottomSheet;
 import com.example.exitconfirmationsandroid.databinding.ActivityShomerBinding;
 import com.example.exitconfirmationsandroid.exit_permissions.ExitPermission;
 import com.example.exitconfirmationsandroid.exit_permissions.ExitPermissionsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
@@ -131,7 +130,7 @@ public class ShomerActivity extends AppCompatActivity {
                         .child("exit_permissions").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot1) {
-                        FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
+                        FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -143,6 +142,7 @@ public class ShomerActivity extends AppCompatActivity {
 
                                 if (snapshot1.getValue().toString().isEmpty()){
                                     //disabling progress bar
+                                    binding.allPermissions.setAdapter(null);
                                     binding.progressBar.setVisibility(View.GONE);
                                     binding.thereIsNoExitPermissionsAlert.setVisibility(View.VISIBLE);
                                     return;

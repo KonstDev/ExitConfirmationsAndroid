@@ -116,7 +116,8 @@ public class ExitPermissionDetails extends Fragment {
                         if (dayOfMonth.length()==1){
                             dayOfMonth = "0"+dayOfMonth;
                         }
-                        String month = Integer.toString(monthI);
+
+                        String month = Integer.toString(monthI+1);
                         if (month.length()==1){
                             month="0"+month;
                         }
@@ -141,7 +142,7 @@ public class ExitPermissionDetails extends Fragment {
                         if (dayOfMonth.length()==1){
                             dayOfMonth = "0"+dayOfMonth;
                         }
-                        String month = Integer.toString(monthI);
+                        String month = Integer.toString(monthI+1);
                         if (month.length()==1){
                             month="0"+month;
                         }
