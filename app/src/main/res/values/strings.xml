@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">מערכת מעבר</string>
+    <string name="app_name">StudPass</string>
     <string name="login">להתחבר</string>
     <string name="login_to_acc">להתחבר לחשבון</string>
     <string name="email">א-מייל</string>

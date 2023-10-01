@@ -117,6 +117,8 @@ public class LoginBottomSheet extends BottomSheetDialogFragment {
 
                                     }
                                 });
+                            }else{
+                                Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
