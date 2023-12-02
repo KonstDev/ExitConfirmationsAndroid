@@ -5,14 +5,14 @@ import java.util.HashMap;
 public class ExitPermission {
     public boolean confirmed;
     public String id,exitDate, exitTime, goingTo, group, madrich_id, madrich_name, returnDate, returnTime,
-            students_ids, students_names, confirmationLink;
+            students_ids, students_names, confirmationLink, realReturnDate, realReturnTime;
 
     public ExitPermission() {
     }
 
     public ExitPermission(String id,boolean confirmed, String exitDate, String exitTime, String goingTo,
                           String group, String madrich_name, String madrich_id, String returnDate,
-                          String returnTime, String students_ids, String students_names, String confirmationLink) {
+                          String returnTime, String students_ids, String students_names, String confirmationLink, String realReturnDate, String realReturnTime) {
         this.id = id;
         this.confirmed = confirmed;
         this.exitDate = exitDate;
@@ -26,6 +26,8 @@ public class ExitPermission {
         this.students_ids = students_ids; //filling in the choosing students fragment
         this.students_names = students_names; //filling in the choosing students fragment
         this.confirmationLink = confirmationLink;
+        this.realReturnDate = realReturnDate;
+        this.realReturnTime = realReturnTime;
     }
 
     public HashMap<String, String> getAsHashMap(){
@@ -41,7 +43,6 @@ public class ExitPermission {
         exitPermission.put("returnTime", returnTime);
         exitPermission.put("students_ids", students_ids);
         exitPermission.put("students_names", students_names);
-
         return exitPermission;
     }
 }
