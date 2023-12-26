@@ -79,7 +79,6 @@ public class MadrichActivity extends AppCompatActivity {
 
     public boolean isExitPermissionOutdated(String returnDate) throws ParseException {
         Calendar calendar = Calendar.getInstance();
-        Date currentDate = calendar.getTime();
 
         // Calculate a week earlier date
         calendar.add(Calendar.WEEK_OF_YEAR, -1);
@@ -94,9 +93,6 @@ public class MadrichActivity extends AppCompatActivity {
         }
         return false;
     }
-
-
-
 
 
     public void loadExitPermissions() {

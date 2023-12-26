@@ -57,12 +57,10 @@ public class AllStudentsChoosing extends Fragment {
                 frameSwitcherData.exitPermission.students_ids = chosenStudentsIds;
 
                 //chosen students names
-                String chosenStudentsNames = ((StudentsAdapter)binding.studentsRv.getAdapter()).getChosenStudentsNames();
-                frameSwitcherData.exitPermission.students_names = chosenStudentsNames;
+                frameSwitcherData.exitPermission.students_names = ((StudentsAdapter)binding.studentsRv.getAdapter()).getChosenStudentsNames();
 
                 //setting group of the student/students
-                String groups = ((StudentsAdapter)binding.studentsRv.getAdapter()).getGroups();
-                frameSwitcherData.exitPermission.group = groups;
+                frameSwitcherData.exitPermission.group = ((StudentsAdapter)binding.studentsRv.getAdapter()).getGroups();
 
                 frameSwitcherData.fragmentManager.beginTransaction()
                         .replace(frameSwitcherData.frame_layout_id, new ExitPermissionDetails(frameSwitcherData, go_back_btn)).commit();
@@ -86,6 +84,7 @@ public class AllStudentsChoosing extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 StudentsAdapter studentsAdapter = (StudentsAdapter) binding.studentsRv.getAdapter();
+                assert studentsAdapter != null;
                 studentsAdapter.filter(newText);
                 return true;
             }
