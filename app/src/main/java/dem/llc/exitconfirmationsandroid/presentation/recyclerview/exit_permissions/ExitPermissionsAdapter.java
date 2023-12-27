@@ -1,4 +1,4 @@
-package dem.llc.exitconfirmationsandroid.exit_permissions;
+package dem.llc.exitconfirmationsandroid.presentation.recyclerview.exit_permissions;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +9,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import dem.llc.exitconfirmationsandroid.R;
-import dem.llc.exitconfirmationsandroid.bottomsheet.MadrichPermissionInfoBottomSheet;
-import dem.llc.exitconfirmationsandroid.bottomsheet.ShomerPermissionInfoBottomSheet;
-import dem.llc.exitconfirmationsandroid.bottomsheet.StudentPermissionInfoBottomSheet;
+import dem.llc.exitconfirmationsandroid.data.models.ExitPermission;
+import dem.llc.exitconfirmationsandroid.presentation.bottomsheet.MadrichPermissionInfoBottomSheet;
+import dem.llc.exitconfirmationsandroid.presentation.bottomsheet.ShomerPermissionInfoBottomSheet;
+import dem.llc.exitconfirmationsandroid.presentation.bottomsheet.StudentPermissionInfoBottomSheet;
 
 import java.util.ArrayList;
 

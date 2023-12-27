@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="15dp"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".bottom_sheet_fragments.PermissionTypeChoosingFragment">
+    tools:context=".presentation.bottom_sheet_fragments.PermissionTypeChoosingFragment">
 
     <TextView
         android:id="@+id/for_whom_permission_tv"

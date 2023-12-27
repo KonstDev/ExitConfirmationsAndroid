@@ -1,4 +1,4 @@
-package dem.llc.exitconfirmationsandroid.exit_permissions;
+package dem.llc.exitconfirmationsandroid.presentation.recyclerview.exit_permissions;
 
 import android.view.View;
 import android.widget.ImageView;

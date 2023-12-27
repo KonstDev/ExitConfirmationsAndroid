@@ -1,4 +1,4 @@
-package dem.llc.exitconfirmationsandroid.bottomsheet;
+package dem.llc.exitconfirmationsandroid.presentation.bottomsheet;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import dem.llc.exitconfirmationsandroid.bottom_sheet_fragments.FrameSwitcherData;
-import dem.llc.exitconfirmationsandroid.bottom_sheet_fragments.PermissionTypeChoosingFragment;
+import dem.llc.exitconfirmationsandroid.presentation.bottom_sheet_fragments.FrameSwitcherData;
+import dem.llc.exitconfirmationsandroid.presentation.bottom_sheet_fragments.PermissionTypeChoosingFragment;
 import dem.llc.exitconfirmationsandroid.databinding.CreateExitPermissionBottomSheetBinding;
-import dem.llc.exitconfirmationsandroid.exit_permissions.ExitPermission;
+import dem.llc.exitconfirmationsandroid.data.models.ExitPermission;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

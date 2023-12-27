@@ -1,4 +1,4 @@
-package dem.llc.exitconfirmationsandroid;
+package dem.llc.exitconfirmationsandroid.presentation.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,10 +9,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.view.View;
 
-import dem.llc.exitconfirmationsandroid.bottomsheet.CreateExitPermissionBottomSheet;
+import dem.llc.exitconfirmationsandroid.presentation.bottomsheet.CreateExitPermissionBottomSheet;
 import dem.llc.exitconfirmationsandroid.databinding.ActivityMadrichBinding;
-import dem.llc.exitconfirmationsandroid.exit_permissions.ExitPermission;
-import dem.llc.exitconfirmationsandroid.exit_permissions.ExitPermissionsAdapter;
+import dem.llc.exitconfirmationsandroid.data.models.ExitPermission;
+import dem.llc.exitconfirmationsandroid.presentation.recyclerview.exit_permissions.ExitPermissionsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

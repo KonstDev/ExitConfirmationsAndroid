@@ -1,4 +1,4 @@
-package dem.llc.exitconfirmationsandroid.students;
+package dem.llc.exitconfirmationsandroid.presentation.recyclerview.students;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import dem.llc.exitconfirmationsandroid.R;
+import dem.llc.exitconfirmationsandroid.data.models.Student;
 
 public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder>{
 

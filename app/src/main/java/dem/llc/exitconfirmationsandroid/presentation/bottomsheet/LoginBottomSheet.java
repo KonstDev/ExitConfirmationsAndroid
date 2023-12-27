@@ -1,4 +1,4 @@
-package dem.llc.exitconfirmationsandroid;
+package dem.llc.exitconfirmationsandroid.presentation.bottomsheet;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +24,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import dem.llc.exitconfirmationsandroid.presentation.activities.MadrichActivity;
+import dem.llc.exitconfirmationsandroid.presentation.activities.ShomerActivity;
+import dem.llc.exitconfirmationsandroid.presentation.activities.StudentActivity;
 import dem.llc.exitconfirmationsandroid.databinding.LoginBottomSheetBinding;
 
 public class LoginBottomSheet extends BottomSheetDialogFragment {

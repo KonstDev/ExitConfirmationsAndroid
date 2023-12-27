@@ -1,4 +1,4 @@
-package dem.llc.exitconfirmationsandroid.dialog;
+package dem.llc.exitconfirmationsandroid.presentation.dialog;
 
 import android.Manifest;
 import android.app.Activity;

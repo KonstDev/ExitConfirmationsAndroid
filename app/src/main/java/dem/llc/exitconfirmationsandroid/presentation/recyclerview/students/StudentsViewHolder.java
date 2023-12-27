@@ -1,4 +1,4 @@
-package dem.llc.exitconfirmationsandroid.students;
+package dem.llc.exitconfirmationsandroid.presentation.recyclerview.students;
 
 import android.view.View;
 import android.widget.ImageView;

@@ -1,21 +1,21 @@
-package dem.llc.exitconfirmationsandroid;
+package dem.llc.exitconfirmationsandroid.presentation.activities;
 
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
-
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import dem.llc.exitconfirmationsandroid.bottomsheet.ShomerPermissionInfoBottomSheet;
-import dem.llc.exitconfirmationsandroid.databinding.ActivityShomerBinding;
-import dem.llc.exitconfirmationsandroid.exit_permissions.ExitPermission;
-import dem.llc.exitconfirmationsandroid.exit_permissions.ExitPermissionsAdapter;
+import android.os.Bundle;
+import android.view.View;
+
+import dem.llc.exitconfirmationsandroid.R;
+import dem.llc.exitconfirmationsandroid.databinding.ActivityStudentBinding;
+import dem.llc.exitconfirmationsandroid.presentation.dialog.ProfileImageDialog;
+import dem.llc.exitconfirmationsandroid.data.models.ExitPermission;
+import dem.llc.exitconfirmationsandroid.presentation.recyclerview.exit_permissions.ExitPermissionsAdapter;
+
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,92 +23,66 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.journeyapps.barcodescanner.ScanContract;
-import com.journeyapps.barcodescanner.ScanOptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ShomerActivity extends AppCompatActivity {
-
-    private ActivityShomerBinding binding;
+public class StudentActivity extends AppCompatActivity {
+    private ActivityStudentBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityShomerBinding.inflate(getLayoutInflater());
+        binding = ActivityStudentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        loadGuardInfo();
+        loadStudentInfo();
         loadExitPermissions();
+
+        loadProfileImage();
 
         binding.refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadGuardInfo();
+                loadStudentInfo();
                 loadExitPermissions();
+                loadProfileImage();
 
                 binding.refresh.setRefreshing(false);
             }
         });
 
-        binding.scanQrCodeBtn.setOnClickListener(new View.OnClickListener() {
+        binding.profileIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                barcodeLauncher.launch(new ScanOptions());
+                ProfileImageDialog dialog = new ProfileImageDialog("Students");
+                dialog.show(getSupportFragmentManager(), "ProfileImageDialog");
             }
         });
-
     }
 
-    private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
-            result -> {
-                if(result.getContents() == null) {
-                    Toast.makeText(getApplicationContext(), "Cancelled", Toast.LENGTH_LONG).show();
-                } else {
-                    String exitPermissionId = result.getContents();
-
-                    FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.child("ExitPermissions").child(exitPermissionId).exists()){
-                                snapshot = snapshot.child("ExitPermissions").child(exitPermissionId);
-
-                                String confirmationLink = snapshot.child("confirmationLink").getValue().toString();
-                                boolean confirmed = Boolean.parseBoolean(snapshot.child("confirmed").getValue().toString());
-                                String exitDate = snapshot.child("exitDate").getValue().toString();
-                                String exitTime = snapshot.child("exitTime").getValue().toString();
-                                String goingTo = snapshot.child("goingTo").getValue().toString();
-                                String group = snapshot.child("group").getValue().toString();
-                                String id = snapshot.child("id").getValue().toString();
-                                String madrich_id = snapshot.child("madrich_id").getValue().toString();
-                                String madrich_name = snapshot.child("madrich_name").getValue().toString();
-                                String returnDate = snapshot.child("returnDate").getValue().toString();
-                                String returnTime = snapshot.child("returnTime").getValue().toString();
-                                String students_ids = snapshot.child("students_ids").getValue().toString();
-                                String students_names = snapshot.child("students_names").getValue().toString();
-
-                                ShomerPermissionInfoBottomSheet shomerPermissionInfoBottomSheet =
-                                        new ShomerPermissionInfoBottomSheet(
-                                                new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, madrich_id, returnDate, returnTime, students_ids, students_names, confirmationLink));
-                                shomerPermissionInfoBottomSheet.show(getSupportFragmentManager(), "shomer bs");
+    private void loadProfileImage(){
+        FirebaseDatabase.getInstance().getReference("Students").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("profile_image_url")
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()){
+                            String profileImage = task.getResult().getValue().toString();
+                            if (task.getResult().getValue().toString().isEmpty()){
+                                binding.profileIv.setImageResource(R.drawable.profile_img);
+                            }else{
+                                Glide.with(getApplicationContext()).load(task.getResult().getValue().toString()).into(binding.profileIv);
                             }
                         }
+                    }
+                });
+    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                }
-            });
-
-
-    public void loadGuardInfo(){
+    private void loadStudentInfo(){
         binding.progressBar.setVisibility(View.VISIBLE);
-        FirebaseDatabase.getInstance().getReference("Guards").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name")
+        FirebaseDatabase.getInstance().getReference("Students").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name")
                 .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -118,9 +92,8 @@ public class ShomerActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    public void loadExitPermissions() {
-        FirebaseDatabase.getInstance().getReference("Guards").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+    private void loadExitPermissions() {
+        FirebaseDatabase.getInstance().getReference("Students").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                         .child("exit_permissions").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot1) {
@@ -129,14 +102,13 @@ public class ShomerActivity extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                                 //if there is no exit permissions
-                                if (!snapshot.child("ExitPermissions").exists()){
+                                if (snapshot.child("ExitConfirmations").exists()){
                                     binding.thereIsNoExitPermissionsAlert.setVisibility(View.VISIBLE);
                                     return;
                                 }
 
                                 if (snapshot1.getValue().toString().isEmpty()){
                                     //disabling progress bar
-                                    binding.allPermissions.setAdapter(null);
                                     binding.progressBar.setVisibility(View.GONE);
                                     binding.thereIsNoExitPermissionsAlert.setVisibility(View.VISIBLE);
                                     return;
@@ -164,8 +136,8 @@ public class ShomerActivity extends AppCompatActivity {
                                     String madrich_id = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("madrich_id").getValue().toString();
                                     String returnDate = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("returnDate").getValue().toString();
                                     String returnTime = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("returnTime").getValue().toString();
-                                    String students_ids = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("student_id").getValue().toString();
-                                    String students_names = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("student_name").getValue().toString();
+                                    String students_ids = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("students_ids").getValue().toString();
+                                    String students_names = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("students_names").getValue().toString();
                                     String confirmationLink = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("confirmationLink").getValue().toString();
 
                                     exitPermissions1.add(new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, madrich_id, returnDate, returnTime, students_ids, students_names, confirmationLink));
@@ -173,22 +145,22 @@ public class ShomerActivity extends AppCompatActivity {
 
 
                                 //updating student's exit permissions
-                                String guard_exit_permissions_str = "";
+                                String student_exit_permissions_str = "";
                                 for (String exitPermissionId : exit_permissions){
-                                    if (guard_exit_permissions_str.isEmpty()){
-                                        guard_exit_permissions_str=exitPermissionId;
+                                    if (student_exit_permissions_str.isEmpty()){
+                                        student_exit_permissions_str=exitPermissionId;
                                     }else{
-                                        guard_exit_permissions_str+=","+exitPermissionId;
+                                        student_exit_permissions_str+=","+exitPermissionId;
                                     }
                                 }
-                                FirebaseDatabase.getInstance().getReference().child("Guards")
+                                FirebaseDatabase.getInstance().getReference().child("Students")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("exit_permissions")
-                                        .setValue(guard_exit_permissions_str);
+                                        .setValue(student_exit_permissions_str);
 
                                 //setting up recycler view
-                                binding.allPermissions.setLayoutManager(new LinearLayoutManager(ShomerActivity.this));
-                                binding.allPermissions.addItemDecoration(new DividerItemDecoration(ShomerActivity.this, DividerItemDecoration.VERTICAL));
-                                binding.allPermissions.setAdapter(new ExitPermissionsAdapter(exitPermissions1, 3, getSupportFragmentManager()));
+                                binding.allPermissions.setLayoutManager(new LinearLayoutManager(StudentActivity.this));
+                                binding.allPermissions.addItemDecoration(new DividerItemDecoration(StudentActivity.this, DividerItemDecoration.VERTICAL));
+                                binding.allPermissions.setAdapter(new ExitPermissionsAdapter(exitPermissions1, 2, getSupportFragmentManager()));
 
                                 //disabling progress bar
                                 binding.progressBar.setVisibility(View.GONE);

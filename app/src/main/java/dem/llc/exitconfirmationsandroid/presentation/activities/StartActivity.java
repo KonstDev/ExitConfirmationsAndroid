@@ -1,4 +1,4 @@
-package dem.llc.exitconfirmationsandroid;
+package dem.llc.exitconfirmationsandroid.presentation.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import dem.llc.exitconfirmationsandroid.databinding.ActivityStartBinding;
+import dem.llc.exitconfirmationsandroid.presentation.bottomsheet.LoginBottomSheet;
 
 public class StartActivity extends AppCompatActivity {
 

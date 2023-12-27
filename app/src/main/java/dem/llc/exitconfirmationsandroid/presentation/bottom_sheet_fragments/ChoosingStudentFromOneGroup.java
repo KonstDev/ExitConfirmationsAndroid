@@ -1,12 +1,10 @@
-package dem.llc.exitconfirmationsandroid.bottom_sheet_fragments;
+package dem.llc.exitconfirmationsandroid.presentation.bottom_sheet_fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +14,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import dem.llc.exitconfirmationsandroid.databinding.StudentsChoosingFragmentBinding;
-import dem.llc.exitconfirmationsandroid.students.Student;
-import dem.llc.exitconfirmationsandroid.students.StudentsAdapter;
+import dem.llc.exitconfirmationsandroid.data.models.Student;
+import dem.llc.exitconfirmationsandroid.presentation.recyclerview.students.StudentsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

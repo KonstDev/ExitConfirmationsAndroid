@@ -1,11 +1,11 @@
-package dem.llc.exitconfirmationsandroid.bottom_sheet_fragments;
+package dem.llc.exitconfirmationsandroid.presentation.bottom_sheet_fragments;
 
 import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 
-import dem.llc.exitconfirmationsandroid.exit_permissions.ExitPermission;
-import dem.llc.exitconfirmationsandroid.students.Student;
+import dem.llc.exitconfirmationsandroid.data.models.ExitPermission;
+import dem.llc.exitconfirmationsandroid.data.models.Student;
 
 public class FrameSwitcherData{
     FragmentManager fragmentManager;

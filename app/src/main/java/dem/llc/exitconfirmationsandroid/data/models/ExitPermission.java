@@ -1,9 +1,9 @@
-package dem.llc.exitconfirmationsandroid.exit_permissions;
+package dem.llc.exitconfirmationsandroid.data.models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import dem.llc.exitconfirmationsandroid.students.Student;
+import dem.llc.exitconfirmationsandroid.data.models.Student;
 
 public class ExitPermission {
     public boolean confirmed;

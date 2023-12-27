@@ -1,4 +1,4 @@
-package dem.llc.exitconfirmationsandroid.students;
+package dem.llc.exitconfirmationsandroid.data.models;
 
 public class Student {
     public String name, id, group;
