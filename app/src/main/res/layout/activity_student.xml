@@ -57,6 +57,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/profile_iv"
+            tools:src="@color/pastel_red"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="20dp"/>
+
         <TextView
             android:id="@+id/user_name_tv"
             android:layout_width="wrap_content"
@@ -65,7 +75,7 @@
             android:layout_weight="1"
             android:textSize="18sp"
             android:text="@string/username"
-            app:layout_constraintStart_toStartOf="@+id/header_title"
+            app:layout_constraintStart_toEndOf="@+id/profile_iv"
             app:layout_constraintTop_toTopOf="@+id/header_title"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="TextSizeCheck" />

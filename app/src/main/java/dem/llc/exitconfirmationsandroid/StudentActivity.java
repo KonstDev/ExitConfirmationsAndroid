@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import dem.llc.exitconfirmationsandroid.databinding.ActivityStudentBinding;
+import dem.llc.exitconfirmationsandroid.dialog.ProfileImageDialog;
 import dem.llc.exitconfirmationsandroid.exit_permissions.ExitPermission;
 import dem.llc.exitconfirmationsandroid.exit_permissions.ExitPermissionsAdapter;
+
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,18 +39,47 @@ public class StudentActivity extends AppCompatActivity {
         loadStudentInfo();
         loadExitPermissions();
 
+        loadProfileImage();
 
         binding.refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 loadStudentInfo();
                 loadExitPermissions();
+                loadProfileImage();
 
                 binding.refresh.setRefreshing(false);
             }
         });
+
+        binding.profileIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProfileImageDialog dialog = new ProfileImageDialog("Students");
+                dialog.show(getSupportFragmentManager(), "ProfileImageDialog");
+            }
+        });
     }
-    public void loadStudentInfo(){
+
+    private void loadProfileImage(){
+        FirebaseDatabase.getInstance().getReference("Students").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("profile_image_url")
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()){
+                            String profileImage = task.getResult().getValue().toString();
+                            if (task.getResult().getValue().toString().isEmpty()){
+                                binding.profileIv.setImageResource(R.drawable.profile_img);
+                            }else{
+                                Glide.with(getApplicationContext()).load(task.getResult().getValue().toString()).into(binding.profileIv);
+                            }
+                        }
+                    }
+                });
+    }
+
+    private void loadStudentInfo(){
         binding.progressBar.setVisibility(View.VISIBLE);
         FirebaseDatabase.getInstance().getReference("Students").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name")
                 .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -59,7 +91,7 @@ public class StudentActivity extends AppCompatActivity {
                     }
                 });
     }
-    public void loadExitPermissions() {
+    private void loadExitPermissions() {
         FirebaseDatabase.getInstance().getReference("Students").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                         .child("exit_permissions").addValueEventListener(new ValueEventListener() {
                     @Override
