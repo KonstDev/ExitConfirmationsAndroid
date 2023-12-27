@@ -71,6 +71,15 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsViewHolder>{
         return filteredStudents.size();
     }
 
+    public ArrayList<Student> getChosenStudents(){
+        ArrayList<Student> chosenStudents = new ArrayList<>();
+        for (Student student : filteredStudents){
+            if (student.selected){
+                chosenStudents.add(student);
+            }
+        }
+        return chosenStudents;
+    }
 
     public String getChosenStudentsIds(){
         String chosenStudentsStr = "";

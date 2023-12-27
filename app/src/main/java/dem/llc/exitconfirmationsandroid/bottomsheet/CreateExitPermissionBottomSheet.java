@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class CreateExitPermissionBottomSheet extends BottomSheetDialogFragment {
 
     private CreateExitPermissionBottomSheetBinding binding;
@@ -50,7 +52,7 @@ public class CreateExitPermissionBottomSheet extends BottomSheetDialogFragment {
                                 new PermissionTypeChoosingFragment(
                                         new FrameSwitcherData(getChildFragmentManager(),
                                                 exitPermission,
-                                                binding.createPermissionFragmentContainer.getId()),
+                                                binding.createPermissionFragmentContainer.getId(), new ArrayList<>()),
                                         binding.backFragmentBtn
                                 )
                         ).commit();

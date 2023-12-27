@@ -1,18 +1,22 @@
 package dem.llc.exitconfirmationsandroid.exit_permissions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import dem.llc.exitconfirmationsandroid.students.Student;
 
 public class ExitPermission {
     public boolean confirmed;
     public String id,exitDate, exitTime, goingTo, group, madrich_id, madrich_name, returnDate, returnTime,
-            students_ids, students_names, confirmationLink;
+            students_ids, students_names, confirmationLink, studentId, studentName;
+    public ArrayList<Student> students;
 
     public ExitPermission() {
     }
 
     public ExitPermission(String id,boolean confirmed, String exitDate, String exitTime, String goingTo,
                           String group, String madrich_name, String madrich_id, String returnDate,
-                          String returnTime, String students_ids, String students_names, String confirmationLink) {
+                          String returnTime, String studentId, String studentName, String confirmationLink) {
         this.id = id;
         this.confirmed = confirmed;
         this.exitDate = exitDate;
@@ -23,8 +27,8 @@ public class ExitPermission {
         this.madrich_id = madrich_id;
         this.returnDate = returnDate;
         this.returnTime = returnTime;
-        this.students_ids = students_ids; //filling in the choosing students fragment
-        this.students_names = students_names; //filling in the choosing students fragment
+        this.studentId = studentId;
+        this.studentName = studentName;
         this.confirmationLink = confirmationLink;
     }
 

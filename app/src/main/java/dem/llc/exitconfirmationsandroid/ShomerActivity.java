@@ -164,8 +164,8 @@ public class ShomerActivity extends AppCompatActivity {
                                     String madrich_id = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("madrich_id").getValue().toString();
                                     String returnDate = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("returnDate").getValue().toString();
                                     String returnTime = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("returnTime").getValue().toString();
-                                    String students_ids = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("students_ids").getValue().toString();
-                                    String students_names = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("students_names").getValue().toString();
+                                    String students_ids = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("student_id").getValue().toString();
+                                    String students_names = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("student_name").getValue().toString();
                                     String confirmationLink = snapshot.child("ExitPermissions").child(exit_permissions.get(i)).child("confirmationLink").getValue().toString();
 
                                     exitPermissions1.add(new ExitPermission(id, confirmed, exitDate, exitTime, goingTo, group, madrich_name, madrich_id, returnDate, returnTime, students_ids, students_names, confirmationLink));

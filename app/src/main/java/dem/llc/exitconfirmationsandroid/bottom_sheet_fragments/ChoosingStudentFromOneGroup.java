@@ -52,21 +52,24 @@ public class ChoosingStudentFromOneGroup extends Fragment {
             @Override
             public void onClick(View v) {
                 //chosen students ids
-                String chosenStudentsIds = ((StudentsAdapter)binding.studentsRv.getAdapter()).getChosenStudentsIds();
-                if (chosenStudentsIds.equals("")){
-                    Toast.makeText(getContext(), "צריך לבחור לפחות תלמיד אחת", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                frameSwitcherData.exitPermission.students_ids = chosenStudentsIds;
+//                String chosenStudentsIds = ((StudentsAdapter)binding.studentsRv.getAdapter()).getChosenStudentsIds();
+//                if (chosenStudentsIds.equals("")){
+//                    Toast.makeText(getContext(), "צריך לבחור לפחות תלמיד אחת", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                frameSwitcherData.exitPermission.students = ((StudentsAdapter)binding.studentsRv.getAdapter()).students;
+//                frameSwitcherData.exitPermission.students_ids = chosenStudentsIds;
+//
+                frameSwitcherData.students = ((StudentsAdapter)binding.studentsRv.getAdapter()).getChosenStudents();
 
-                //chosen students names
-                String chosenStudentsNames = ((StudentsAdapter)binding.studentsRv.getAdapter()).getChosenStudentsNames();
-                frameSwitcherData.exitPermission.students_names = chosenStudentsNames;
-
-                //setting group of the student/students
-                //this is choosing students from only one group, so we can set just one group
-                frameSwitcherData.exitPermission.group = ((StudentsAdapter)binding.studentsRv.getAdapter()).students.get(0).group;
-                Log.d("TAG", "group: " + ((StudentsAdapter)binding.studentsRv.getAdapter()).students.get(0).group);
+//                //chosen students names
+//                String chosenStudentsNames = ((StudentsAdapter)binding.studentsRv.getAdapter()).getChosenStudentsNames();
+//                frameSwitcherData.exitPermission.students_names = chosenStudentsNames;
+//
+//                //setting group of the student/students
+//                //this is choosing students from only one group, so we can set just one group
+//                frameSwitcherData.exitPermission.group = ((StudentsAdapter)binding.studentsRv.getAdapter()).students.get(0).group;
+//                Log.d("TAG", "group: " + ((StudentsAdapter)binding.studentsRv.getAdapter()).students.get(0).group);
 
                 frameSwitcherData.fragmentManager.beginTransaction()
                         .replace(frameSwitcherData.frame_layout_id, new ExitPermissionDetails(frameSwitcherData, go_back_btn)).commit();

@@ -164,6 +164,12 @@ public class ExitPermissionDetails extends Fragment {
                     frameSwitcherData.exitPermission.returnTime = binding.returnTimeTv.getText().toString();
                     frameSwitcherData.exitPermission.returnDate = binding.returnDateTv.getText().toString();
 
+
+                    String studentsIds = frameSwitcherData.exitPermission.students_ids;
+                    String[] studentsIdsArr = studentsIds.split(",");
+                    String studentsNames = frameSwitcherData.exitPermission.students_names;
+                    String[] studentsNamesArr = studentsNames.split(",");
+
                     FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
