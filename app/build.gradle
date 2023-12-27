@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.exitconfirmationsandroid'
+    namespace 'dem.llc.exitconfirmationsandroid'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.exitconfirmationsandroid"
+        applicationId "dem.llc.exitconfirmationsandroid"
         minSdk 26
         targetSdk 33
         versionCode 1
