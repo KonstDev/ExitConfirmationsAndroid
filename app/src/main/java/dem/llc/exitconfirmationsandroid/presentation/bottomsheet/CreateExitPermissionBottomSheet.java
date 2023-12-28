@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import dem.llc.exitconfirmationsandroid.presentation.bottom_sheet_fragments.FrameSwitcherData;
 import dem.llc.exitconfirmationsandroid.presentation.bottom_sheet_fragments.PermissionTypeChoosingFragment;
 import dem.llc.exitconfirmationsandroid.databinding.CreateExitPermissionBottomSheetBinding;
-import dem.llc.exitconfirmationsandroid.data.models.ExitPermission;
+
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

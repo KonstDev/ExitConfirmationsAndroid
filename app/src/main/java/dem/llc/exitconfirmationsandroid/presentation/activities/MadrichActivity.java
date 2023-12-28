@@ -11,7 +11,6 @@ import android.view.View;
 
 import dem.llc.exitconfirmationsandroid.presentation.bottomsheet.CreateExitPermissionBottomSheet;
 import dem.llc.exitconfirmationsandroid.databinding.ActivityMadrichBinding;
-import dem.llc.exitconfirmationsandroid.data.models.ExitPermission;
 import dem.llc.exitconfirmationsandroid.presentation.recyclerview.exit_permissions.ExitPermissionsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

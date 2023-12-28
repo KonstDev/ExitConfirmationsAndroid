@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 import dem.llc.exitconfirmationsandroid.R;
 import dem.llc.exitconfirmationsandroid.databinding.ConfirmationInfoStudentBottomSheetBinding;
-import dem.llc.exitconfirmationsandroid.data.models.ExitPermission;
+
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;

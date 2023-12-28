@@ -4,7 +4,6 @@ import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 
-import dem.llc.exitconfirmationsandroid.data.models.ExitPermission;
 import dem.llc.exitconfirmationsandroid.data.models.Student;
 
 public class FrameSwitcherData{

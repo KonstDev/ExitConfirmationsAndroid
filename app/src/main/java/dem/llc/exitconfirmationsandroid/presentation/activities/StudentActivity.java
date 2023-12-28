@@ -12,7 +12,6 @@ import android.view.View;
 import dem.llc.exitconfirmationsandroid.R;
 import dem.llc.exitconfirmationsandroid.databinding.ActivityStudentBinding;
 import dem.llc.exitconfirmationsandroid.presentation.dialog.ProfileImageDialog;
-import dem.llc.exitconfirmationsandroid.data.models.ExitPermission;
 import dem.llc.exitconfirmationsandroid.presentation.recyclerview.exit_permissions.ExitPermissionsAdapter;
 
 import com.bumptech.glide.Glide;
